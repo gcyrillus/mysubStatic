@@ -1,0 +1,14 @@
+nav.nav span.static+ul {
+  padding-left:2rem
+}
+nav.nav li.menu>span.group + ul ,
+nav.nav li.menu> span.group+ ul li>span.group + ul {
+  display:none;
+}
+nav.nav li.menu:hover span.group+ ul,
+nav.nav li.menu:hover span+ ul li:hover > span.group+ ul {
+  display:block;
+}
+nav.nav li.menu ul ul {
+  position:static;
+}
