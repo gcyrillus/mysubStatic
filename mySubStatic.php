@@ -2,7 +2,7 @@
 	/**
 		* Plugin 	mySubStatic
 		* @author	Cyrille G.  @ re7net.com
-		* pages statiques à deux niveaux
+		* pages statique à deux niveaux
 	**/
 	class mySubStatic extends plxPlugin {
         const BEGIN_CODE = '<?php' . PHP_EOL;
@@ -103,7 +103,7 @@
 				echo self::BEGIN_CODE;
 				?>
 				$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>', $output);
-				$output = str_replace('home  ', ob_get_clean().PHP_EOL.'', $output);/* ?? d'où vient cette chaine ? */
+				$output = str_replace('home		', ob_get_clean().'', $output);/* ?? d'où vient cette chaine ? */
 				<?php
 				echo self::END_CODE;		
 			}
