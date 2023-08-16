@@ -1,4 +1,4 @@
-<?php
+<?php  # part of PluXml plugin mySubStatic
 		$extra='';
 		$home = ((empty($this->plxMotor->get) or preg_match('/^page[0-9]*/', $this->plxMotor->get)) and basename($_SERVER['SCRIPT_NAME']) == "index.php");
 		# Si on a la variable extra, on affiche un lien vers la page d'accueil (avec $extra comme nom)
