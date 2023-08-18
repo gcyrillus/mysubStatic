@@ -44,7 +44,6 @@
 							end($menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']]);
 							$key = key($menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']]);	
 							# ajout du marker.
-							//if($this->plxMotor->aStats[substr($v['group'],0,3)]['menu'] =='oui')
 							$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key].='<!-- '.$this->plxMotor->aStats[substr($v['group'],0,3)]['group'].' -->';
 						}
 					}
