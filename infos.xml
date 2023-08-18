@@ -2,9 +2,9 @@
 <document>
     <title>sub static</title>
     <author>G.Cyrille</author>
-    <version>BÊTA</version>
-	<date>12/08/2023</date>
+    <version>1.0.1</version>
+	<date>16/08/2023</date>
     <site>https://re7net.com</site>
-    <description><![CDATA[Ajoute un niveau aux groupes statics via la staticList() réecrite.]]></description>
+    <description><![CDATA[mimique des sous catégories via la fonction staticList() réecrite.]]></description>
     <scope></scope>
 </document>

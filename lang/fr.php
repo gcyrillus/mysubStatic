@@ -1,4 +1,5 @@
 <?php
+
 $LANG = array(
 'L_FORMAT'					=>'Format de liste &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
 'L_FORMAT_GROUP'			=>'Format tête de liste',

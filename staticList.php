@@ -1,4 +1,4 @@
-<?php  # part of PluXml plugin mySubStatic
+<?php
 		$extra='';
 		$home = ((empty($this->plxMotor->get) or preg_match('/^page[0-9]*/', $this->plxMotor->get)) and basename($_SERVER['SCRIPT_NAME']) == "index.php");
 		# Si on a la variable extra, on affiche un lien vers la page d'accueil (avec $extra comme nom)
@@ -36,6 +36,18 @@
 						$menus[$v['group']][] = $stat;
 					if ($group_active == '' and $home === false and $this->staticId() == intval($k) and $v['group'] != '')
 						$group_active = $v['group'];
+					# est ce un sous groupe ?
+					if(isset($this->plxMotor->aStats[substr($v['group'],0,3)]['group']) and $this->plxMotor->aStats[substr($v['group'],0,3)]['group'] !='' and $this->plxMotor->aStats[substr($v['group'],0,3)]['menu'] =='oui') {
+						# insertion du marker de sous-groupe dans le menu
+						if(!isset($found[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']])) {// test si déjà vu
+							$found[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']] ='set';
+							end($menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']]);
+							$key = key($menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']]);	
+							# ajout du marker.
+							//if($this->plxMotor->aStats[substr($v['group'],0,3)]['menu'] =='oui')
+							$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key].='<!-- '.$this->plxMotor->aStats[substr($v['group'],0,3)]['group'].' -->';
+						}
+					}
 				}
 			}
 		}
@@ -66,19 +78,20 @@
 				if (is_numeric($k)) {
 					echo "\n" . (is_array($v) ? $v[0] : $v);
 				} else {
+
 					if( !array_key_exists(trim(substr($k,0,3)),$this->plxMotor->aStats))  {
 					$group = strtr($format_group, [
 						'#group_id'		=> 'static-group-' . plxUtils::urlify($k),
 						'#group_class'	=> 'static group',
 						'#group_status'	=> ($group_active == $k) ? 'active' : 'noactive',
 						'#group_name'	=> plxUtils::strCheck($k),
-					]).PHP_EOL;					
+					]).PHP_EOL;
 ?>
 
 <li class="menu">
 		<?= $group ?>
 		<ul id="static-<?= plxUtils::urlify($k) ?>" class="sub-menu">
-		<?= implode("\t\t" . PHP_EOL, $v); ?><!-- <?= plxUtils::strCheck($k) ?> -->
+		<?= implode("\t\t" . PHP_EOL, $v); ?><!--- <?= plxUtils::strCheck($k) ?> -->
 		</ul>
 </li><?php
 					}

@@ -1,4 +1,5 @@
 <h1>Aide mySubStatic</h1>
+
 <h2>Configuration d'un sous groupe</h2>
 <p>Un nom de groupe de page statique peut-être utilisé comme un groupe parent.</p>
 <p>Pour cela, votre nouvelle page statique doit avoir un nom de groupe prefixé avec l'identifiant d'une page statique ayant un  nom de groupe</p>
@@ -153,4 +154,5 @@
   
   <h2>Configuration de l'affichage</h2>
   <p>L'affichage des sous groupes reprend le format par défaut des groupes de pages statiques. Voir la documentation Officielle <a href="https://wiki.pluxml.org/docs/develop/plxshow.html#staticlist">fonction staticList()</a>.</p>
-  <p>Le format des sous groupes est modifiable depuis la page "configuration" du plugin.</p>  
+  <p>Le format des sous groupes est modifiable depuis la page "configuration" du plugin.</p>
+  

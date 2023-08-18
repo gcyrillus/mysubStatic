@@ -7,6 +7,7 @@ plxToken::validateFormToken($_POST);
 # Liste des langues disponibles et prises en charge par le plugin
 $aLangs = array($plxAdmin->aConf['default_lang']);
 
+
 if(!empty($_POST)) {
 	$plxPlugin->setParam('format', $_POST['format'], 'cdata');
 	$plxPlugin->setParam('format_group', $_POST['format_group'], 'cdata');
@@ -43,4 +44,5 @@ $var['format_group'] =  $plxPlugin->getParam('format_group')=='' ? '<span class=
 			<?php echo plxToken::getTokenPostMethod() ?>
 			<input type="submit" name="submit" value="<?php $plxPlugin->lang('L_SAVE') ?>" />
 		</p>
+
 </form>
