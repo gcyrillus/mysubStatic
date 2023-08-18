@@ -90,7 +90,7 @@
 <li class="menu">
 		<?= $group ?>
 		<ul id="static-<?= plxUtils::urlify($k) ?>" class="sub-menu">
-		<?= implode("\t\t" . PHP_EOL, $v); ?><!--- <?= plxUtils::strCheck($k) ?> -->
+		<?= implode("\t\t" . PHP_EOL, $v); ?>
 		</ul>
 </li><?php
 					}
