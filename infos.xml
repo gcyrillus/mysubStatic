@@ -5,6 +5,6 @@
     <version>1.0.1</version>
 	<date>16/08/2023</date>
     <site>https://re7net.com</site>
-    <description><![CDATA[mimique des sous catégories via la fonction staticList() réecrite.]]></description>
+    <description><![CDATA[mimique des sous statiques via la fonction staticList() réecrite.]]></description>
     <scope></scope>
 </document>
