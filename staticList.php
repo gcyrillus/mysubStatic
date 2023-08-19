@@ -13,7 +13,6 @@
 		}
 
 		$group_active = '';
-		$subgroup_active = '';
 		if ($this->plxMotor->aStats) {
 			foreach ($this->plxMotor->aStats as $k => $v) {
 				if ($v['active'] == 1 and $v['menu'] == 'oui') { # La page  est bien active et dispo ds le menu
