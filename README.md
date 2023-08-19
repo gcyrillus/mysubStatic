@@ -150,6 +150,13 @@ ajoute un niveau aux groupes de pages statique
   <li class="alert green">Les deux pages statiques dans le groupe <b><u>002</u>sous-test</b> seront affichées au menu dans le groupe sous-test qui sera lui même affiché comme sous groupe de test (identifiant:<b><u>002</u></b>).</li>
   <li class="alert red">La page statique rattachée au groupe <b><u>001</u>test</b> ne sera pas affichée au menu, car la page <b>statique 1</b> avec l'identifiant <b><u>001</u></b> n'a aucun groupe.</li>
   </ol>
+  <p>La structure produite ressemblera à:</p> 
+  <pre>
+* statique 1 ▼ test
+               * test
+               ▼ sous test
+                * sous test
+                * autre sous test</pre>
   
   <h2>Configuration de l'affichage</h2>
   <p>L'affichage des sous groupes reprend le format par défaut des groupes de pages statiques. Voir la documentation Officielle <a href="https://wiki.pluxml.org/docs/develop/plxshow.html#staticlist">fonction staticList()</a>.</p>
