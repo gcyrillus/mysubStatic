@@ -86,8 +86,8 @@
 		
 		# reinjection des sous statiques
 		public function ThemeEndBody() {
-			$html='';
 			foreach($this->subs as $sub => $li) {
+				$html='';
 				$name=$sub;
 				if(is_array($li)) {
 					foreach($li as $k => $val) {
