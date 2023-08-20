@@ -91,7 +91,7 @@
 				$name=$sub;
 				if(is_array($li)) {
 					foreach($li as $k => $val) {
-						$html .= $k.'			<ul id="static-'.$sub.'" class="sub-menu">'.PHP_EOL;				
+						$html .= $k.'			<ul class="sub-menu static-'.$sub.'">'.PHP_EOL;				
 						if(is_array($val)) {
 							foreach($val as $sub => $v) {
 								$html .= $v;
