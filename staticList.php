@@ -24,7 +24,7 @@
 						$url = $this->plxMotor->urlRewrite('?static' . intval($k) . '/' . $v['url']);
 					$stat = strtr($format, [
 						'#static_id'		=> 'static-' . intval($k),
-						'#static_class'		=> 'static menu',
+						'#static_class'		=> 'menu',
 						'#static_name'		=> plxUtils::strCheck($v['name']),
 						'#static_status'	=> ($this->staticId() == intval($k)) ? 'active' : 'noactive',
 						'#static_url'		=> $url,
@@ -37,6 +37,7 @@
 						$group_active = $v['group'];
 					# est ce un sous groupe ?
 					if(isset($this->plxMotor->aStats[substr($v['group'],0,3)]['group']) and $this->plxMotor->aStats[substr($v['group'],0,3)]['group'] !='' and $this->plxMotor->aStats[substr($v['group'],0,3)]['menu'] =='oui') {
+					
 						# insertion du marker de sous-groupe dans le menu
 						if(!isset($found[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']])) {// test si déjà vu
 							$found[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']] ='set';
@@ -44,6 +45,9 @@
 							$key = key($menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']]);	
 							# ajout du marker.
 							$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key].='<!-- '.$this->plxMotor->aStats[substr($v['group'],0,3)]['group'].' -->';
+							# nettoyage des class par défaut de pluxml, on ne garde que menu
+							$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]=  str_replace(' noactive','',$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]);
+							$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]=  str_replace(' active','',$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]);
 						}
 					}
 				}
