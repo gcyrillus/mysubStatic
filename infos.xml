@@ -2,9 +2,9 @@
 <document>
     <title>sub static</title>
     <author>G.Cyrille</author>
-    <version>1.0.1</version>
-	<date>16/08/2023</date>
+    <version>V.1.0.0</version>
+	<date>21/08/2023</date>
     <site>https://re7net.com</site>
-    <description><![CDATA[mimique des sous statiques via la fonction staticList() réecrite.]]></description>
+    <description><![CDATA[permet d'afficher des sous groupe de statique au menus. Voir le fichier d'aide]]></description>
     <scope></scope>
 </document>
