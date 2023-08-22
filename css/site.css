@@ -1,18 +1,30 @@
-nav.nav span.static+ul {
-  padding-left:2rem
+li[class^='menu'] .sub-menu {
+    display: none;
+    overflow-y:revert;
 }
-nav.nav li.menu>span.group + ul ,
-nav.nav li.menu> span.group+ ul >li>span.group + ul {
-  max-height:0;
-  transition:3s 0s;
+.open ~ .sub-menu {
+    display:block;
 }
-nav.nav  ul.menu > li.menu:hover > ul.sub-menu > .menu-item,
-nav.nav li.menu:hover span.group+ ul,
-nav.nav li.menu:hover span+ ul li:hover > span.group+ ul {
-  display:block;
-  max-height:70vh;
-  transition:0;
+.sub-menu .sub-menu {
+    position: static;
 }
-nav.nav li.menu ul ul {
-  position:static;
+li[class^='menu'] span {
+    display: block;
+}
+li[class^='menu'] li[class^='menu'] :is(a,
+span,
+li) {
+    margin-left: 1em;
+}
+li[class^='menu'] span:before {
+    content: "\25ba ";
+}
+li[class^='menu'] span.open:before {
+    content: "\25bc ";
+}
+li[class^='menu'] .sub-menu {
+    display: none;
+}
+li[class^='menu']:hover .open ~ .sub-menu {
+    display: block;
 }
