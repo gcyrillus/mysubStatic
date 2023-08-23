@@ -92,7 +92,8 @@
 			$navgroup 	= $this->getParam('interlink')	=='' ? 0 : $this->getParam('interlink');
 			echo self::BEGIN_CODE;
 			?>
-			$breadcrumbs='';
+			$active =$this->plxMotor->aStats[$this->plxMotor->cible]['name'];
+			$breacrumbs='';
 			$nav='';
 			$rel='<?= L_PAGINATION_PREVIOUS_TITLE  ?>';
 			$group_active ='';
@@ -121,28 +122,33 @@
 				}		
 			}
 
-			if(<?= $ariane ?> == 1 ) {			
-			#fil d'ariane
-			$breacrumbs='
-			<ul class="repertory menu breadcrumb">
-						<li><a href="'.$this->plxMotor->urlRewrite().'">'.$this->getLang('HOME').'</a></li>';
-						if(array_key_exists(trim(substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)),$this->plxMotor->aStats)) {
-			$breacrumbs.= '<li><a href="'.$this->plxMotor->urlRewrite('?static' . intval(substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)) . '/'.$this->plxMotor->aStats[substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)]['url']).'">'.$this->plxMotor->aStats[substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)]['group'].'</a></li>';
-						}
-			$breacrumbs.='<li class="active">'.$active.'</li>';			
-			$breacrumbs.='			</ul>';
+			if(<?= $ariane ?> == 1  and $this->plxMotor->aStats[$this->plxMotor->cible]['group'] !='' ) {			
+				#fil d'ariane
+				$breacrumbs='
+				<ul class="repertory menu breadcrumb">
+					<li><a href="'.$this->plxMotor->urlRewrite().'">'.$this->getLang('HOME').'</a></li>'.PHP_EOL;
+				if(array_key_exists(trim(substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)),$this->plxMotor->aStats)) {
+				$breacrumbs.= '					<li><a href="'.$this->plxMotor->urlRewrite('?static' . intval(substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)) . '/'.$this->plxMotor->aStats[substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)]['url']).'">'.$this->plxMotor->aStats[substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)]['group'].'</a></li>
+					<li>'.substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],3).'</li>'.PHP_EOL;
+				}
+				else {
+				$breacrumbs.='					<li>'.$this->plxMotor->aStats[$this->plxMotor->cible]['group'].'</li>'.PHP_EOL;
+				}
+				$breacrumbs.='					<li class="active">'.$active.'</li>'.PHP_EOL;			
+				$breacrumbs.='				</ul>';
 			}		
 			if(<?= $navgroup ?> == 1 ) {				
 			#navigation niveau groupe
-			if(count($cocoon)>1) {
-			$nav = '<nav id="<?= __CLASS__ ?>" class="prevNext">Pages:';
-				foreach ($cocoon as $adj) {
-				$nav .=  $adj;
+				if(count($cocoon)>1) {
+				$nav = '<nav id="<?= __CLASS__ ?>" class="prevNext">Pages:';
+					foreach ($cocoon as $adj) {
+					$nav .=  $adj;
+					}
+				$nav .=  '</nav>';
 				}
-			$nav .=  '</nav>';
 			}
-			$output=$breacrumbs.$output.PHP_EOL.$nav;
-			}
+			
+			$output=$breacrumbs.PHP_EOL.$output.PHP_EOL.$nav;
 			<?php
             echo self::END_CODE;
 			
