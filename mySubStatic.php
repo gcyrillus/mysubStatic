@@ -134,13 +134,19 @@
 				else {
 				$breacrumbs.='					<li>'.$this->plxMotor->aStats[$this->plxMotor->cible]['group'].'</li>'.PHP_EOL;
 				}
-				$breacrumbs.='					<li class="active">'.$active.'</li>'.PHP_EOL;			
+				$breacrumbs.='					<li><em class="active">'.$active.'</em></li>'.PHP_EOL;			
 				$breacrumbs.='				</ul>';
 			}		
 			if(<?= $navgroup ?> == 1 ) {				
 			#navigation niveau groupe
-				if(count($cocoon)>1) {
-				$nav = '<nav id="<?= __CLASS__ ?>" class="prevNext">Pages:';
+				if(count($cocoon)>1) {				
+					if(array_key_exists(trim(substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)),$this->plxMotor->aStats)) {
+						$groupName= substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],3);
+					}
+					else {
+						$groupName=$this->plxMotor->aStats[$this->plxMotor->cible]['group'];
+					}				
+				$nav = '<nav id="<?= __CLASS__ ?>" class="prevNext"><b style="text-transform:uppercase">'.$groupName.': </b>';
 					foreach ($cocoon as $adj) {
 					$nav .=  $adj;
 					}
