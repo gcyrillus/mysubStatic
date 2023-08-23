@@ -1,0 +1,9 @@
+#form_mySubStatic fieldset,
+#form_mySubStaticlegend {
+  padding:revert;
+  border:revert;
+}
+#form_mySubStatic p {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+}

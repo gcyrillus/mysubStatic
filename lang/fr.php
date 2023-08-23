@@ -5,5 +5,8 @@ $LANG = array(
 'L_FORMAT_GROUP'			=>'Format tête de liste',
 'L_SAVE'					=>'Enregistrer',
 'L_HELP'					=>'Par défaut, les formats sont ceux de la fonction staticList(), voir :',
+'L_STAT_NAVS'				=>'Barre de navigation des pages statiques',
+'L_SHOW_BREADCRUMBS'		=>'Afficher le fil d\'Ariane dans les groupes',
+'L_SHOW_INTERLINK'			=>'Afficher les liens des autres pages du groupe',
 );
 ?>

@@ -28,6 +28,7 @@
 			$this->addHook('IndexBegin','IndexBegin');
 			$this->addHook('plxShowStaticListBegin','plxShowStaticListBegin');
 			$this->addHook('ThemeEndBody','ThemeEndBody');
+			$this->addHook('plxShowStaticContent','plxShowStaticContent');
 			$this->addHook('SitemapEnd','SitemapEnd');
 			
 			
@@ -85,6 +86,69 @@
             echo self::END_CODE;
 		}
 		
+		# inclure une navigation entre statiques du même groupe
+		public function plxShowStaticContent() {
+			$ariane 	= $this->getParam('breadcrumbs')=='' ? 0 : $this->getParam('breadcrumbs');
+			$navgroup 	= $this->getParam('interlink')	=='' ? 0 : $this->getParam('interlink');
+			echo self::BEGIN_CODE;
+			?>
+			$breadcrumbs='';
+			$nav='';
+			$rel='<?= L_PAGINATION_PREVIOUS_TITLE  ?>';
+			$group_active ='';
+			$cocoon=array();
+			foreach ($this->plxMotor->aStats as $k => $v) {
+				if(
+					$v['group'] !=''  and $v['group'] !='home' 
+				and
+					($k == substr($this->plxMotor->cible,0,3) or $v['group'] == $this->plxMotor->aStats[$this->plxMotor->cible]['group'])  
+				) {
+					if ($group_active == ''  and $this->staticId() == intval($k) and $v['group'] != '') {
+					$active = plxUtils::strCheck($v['name']);
+						$cocoon[plxUtils::strCheck($v['name'])]= '<a class="active">'.$active.'</a>';
+						$rel='<?= L_PAGINATION_NEXT_TITLE  ?>';
+						continue;// on passe
+					}
+					#recup URL
+					if ($v['url'][0] == '?') # url interne commençant par ?
+						$url = $this->plxMotor->urlRewrite($v['url']);
+					elseif (plxUtils::checkSite($v['url'], false)) # url externe en http ou autre
+						$url = $v['url'];
+					else # url page statique
+						$url = $this->plxMotor->urlRewrite('?static' . intval($k) . '/' . $v['url']);
+						
+					$cocoon[plxUtils::strCheck($v['name'])]= '<a href="'.$url.'" rel="'.$rel.'" title="'.$rel.' '.plxUtils::strCheck($v['name']).'">'.plxUtils::strCheck($v['name']).'</a>';
+				}		
+			}
+
+			if(<?= $ariane ?> == 1 ) {			
+			#fil d'ariane
+			$breacrumbs='
+			<ul class="repertory menu breadcrumb">
+						<li><a href="'.$this->plxMotor->urlRewrite().'">'.$this->getLang('HOME').'</a></li>';
+						if(array_key_exists(trim(substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)),$this->plxMotor->aStats)) {
+			$breacrumbs.= '<li><a href="'.$this->plxMotor->urlRewrite('?static' . intval(substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)) . '/'.$this->plxMotor->aStats[substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)]['url']).'">'.$this->plxMotor->aStats[substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)]['group'].'</a></li>';
+						}
+			$breacrumbs.='<li class="active">'.$active.'</li>';			
+			$breacrumbs.='			</ul>';
+			}		
+			if(<?= $navgroup ?> == 1 ) {				
+			#navigation niveau groupe
+			if(count($cocoon)>1) {
+			$nav = '<nav id="<?= __CLASS__ ?>" class="prevNext">Pages:';
+				foreach ($cocoon as $adj) {
+				$nav .=  $adj;
+				}
+			$nav .=  '</nav>';
+			}
+			$output=$breacrumbs.$output.PHP_EOL.$nav;
+			}
+			<?php
+            echo self::END_CODE;
+			
+		}
+		
+		
 		# reinjection des sous statiques
 		public function ThemeEndBody() {
 			foreach($this->subs as $sub => $li) {
@@ -106,23 +170,23 @@
 			?>
 			$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>'.PHP_EOL, $output);
 			$output = str_replace('home		', ob_get_clean().'', $output);/* ?? d'où vient cette chaine ? */	
-		<?php
-			echo self::END_CODE;
-		}			  
-		
-		echo self::BEGIN_CODE;
-		?>	
-		$output = str_replace('</body>', ob_get_clean().'<script src="'.PLX_ROOT.'plugins/mySubStatic/js/mySubStatic.js"></script>'.PHP_EOL.'</body>', $output);
-		<?php
-		echo self::END_CODE;
-}
+			<?php
+				echo self::END_CODE;
+			}			  
+			
+			echo self::BEGIN_CODE;
+			?>	
+			$output = str_replace('</body>', ob_get_clean().'<script src="'.PLX_ROOT.'plugins/<?= __CLASS__ ?>/js/<?= __CLASS__ ?>.js"></script>'.PHP_EOL.'</body>', $output);
+			<?php
+				echo self::END_CODE;
+		}
 
-#nettoyage sitemap.php 
-public function SitemapEnd() {			  
-	echo self::BEGIN_CODE;
-?>
-$output = str_replace('home		', ob_get_clean().'', $output);/* ?? d'où vient cette chaine ? */
-<?php
-	echo self::END_CODE;		
-}
+		#nettoyage sitemap.php 
+		public function SitemapEnd() {			  
+			echo self::BEGIN_CODE;
+			?>
+			$output = str_replace('home		', ob_get_clean().'', $output);/* ?? d'où vient cette chaine ? */
+			<?php
+			echo self::END_CODE;		
+		}
 }
