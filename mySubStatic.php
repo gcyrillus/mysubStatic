@@ -28,7 +28,7 @@
 			$this->addHook('IndexBegin','IndexBegin');
 			$this->addHook('plxShowStaticListBegin','plxShowStaticListBegin');
 			$this->addHook('ThemeEndBody','ThemeEndBody');
-			$this->addHook('plxShowStaticContent','plxShowStaticContent');
+			$this->addHook('plxShowStaticContentBegin','plxShowStaticContentBegin');
 			$this->addHook('SitemapEnd','SitemapEnd');
 			
 			
@@ -87,15 +87,15 @@
 		}
 		
 		# inclure une navigation entre statiques du même groupe
-		public function plxShowStaticContent() {
+		public function plxShowStaticContentBegin() {
 			$ariane 	= $this->getParam('breadcrumbs')=='' ? 0 : $this->getParam('breadcrumbs');
 			$navgroup 	= $this->getParam('interlink')	=='' ? 0 : $this->getParam('interlink');
 			echo self::BEGIN_CODE;
-			?>
+			?>	
 			$active =$this->plxMotor->aStats[$this->plxMotor->cible]['name'];
 			$breacrumbs='';
 			$nav='';
-			$rel='<?= L_PAGINATION_PREVIOUS_TITLE  ?>';
+			$rel='<?= L_PAGINATION_PREVIOUS_TITLE  ?>: ';
 			$group_active ='';
 			$cocoon=array();
 			foreach ($this->plxMotor->aStats as $k => $v) {
@@ -107,8 +107,8 @@
 					if ($group_active == ''  and $this->staticId() == intval($k) and $v['group'] != '') {
 					$active = plxUtils::strCheck($v['name']);
 						$cocoon[plxUtils::strCheck($v['name'])]= '<a class="active">'.$active.'</a>';
-						$rel='<?= L_PAGINATION_NEXT_TITLE  ?>';
-						continue;// on passe
+						$rel='<?= L_PAGINATION_NEXT_TITLE  ?>: ';
+						continue;// on passe la page courante
 					}
 					#recup URL
 					if ($v['url'][0] == '?') # url interne commençant par ?
@@ -154,10 +154,28 @@
 				}
 			}
 			
-			$output=$breacrumbs.PHP_EOL.$output.PHP_EOL.$nav;
+		# On va verifier que la page a inclure est lisible
+		if ($this->plxMotor->aStats[$this->plxMotor->cible]['readable'] == 1) {
+			# On genere le nom du fichier a inclure
+			$file = PLX_ROOT . $this->plxMotor->aConf['racine_statiques'] . $this->plxMotor->cible;
+			$file .= '.' . $this->plxMotor->aStats[$this->plxMotor->cible]['url'] . '.php';
+			# Inclusion du fichier
+			ob_start();
+			require $file;
+			$output = ob_get_clean();
+			eval($this->plxMotor->plxPlugins->callHook('plxShowStaticContent'));
+
+			$output= $breacrumbs.PHP_EOL.$output.PHP_EOL.$nav;
+			echo $output;
+		} else {
+			echo $breacrumbs.'<p class="alert orange">' . L_STATICCONTENT_INPROCESS . '</p>'.$nav;
+		}			
+		
+		# fin de traitement de la page statique
+		return true;
 			<?php
             echo self::END_CODE;
-			
+	
 		}
 		
 		
