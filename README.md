@@ -158,6 +158,12 @@ ajoute un niveau aux groupes de pages statique
                 * sous test
                 * autre sous test</pre>
   
-  <h2>Configuration de l'affichage</h2>
+  <h2>Configuration et options de l'affichage</h2>
+  <h3>configuration</h3>
   <p>L'affichage des sous groupes reprend le format par défaut des groupes de pages statiques. Voir la documentation Officielle <a href="https://wiki.pluxml.org/docs/develop/plxshow.html#staticlist">fonction staticList()</a>.</p>
   <p>Le format des sous groupes est modifiable depuis la page "configuration" du plugin.</p>
+  <h3>options</h3>
+  <ol>
+    <li>Affichage d'un fil d'ariane pour les pages d'un groupe</li>
+    <li>Affichage des liens entre pages de même groupe <sub>(même niveau)</sub></li>
+  </ol>
