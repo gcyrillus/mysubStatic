@@ -4,7 +4,7 @@
 		if ($extra != '') {
 			$menus[][] = strtr($format, [
 				'#static_id'	=> 'static-home',
-				'#static_class'	=> 'static menu',
+				'#static_class'	=> 'static menu menu-item',
 				'#static_url'	=> $this->plxMotor->urlRewrite(),
 				'#static_name'	=> plxUtils::strCheck($extra),
 				'#static_status'	=> $home ? 'active' : 'noactive',
@@ -23,7 +23,7 @@
 						$url = $this->plxMotor->urlRewrite('?static' . intval($k) . '/' . $v['url']);
 					$stat = strtr($format, [
 						'#static_id'		=> 'static-' . intval($k),
-						'#static_class'		=> 'menu',
+						'#static_class'		=> 'menu menu-item',
 						'#static_name'		=> plxUtils::strCheck($v['name']),
 						'#static_status'	=> ($this->staticId() == intval($k)) ? 'active' : 'noactive',
 						'#static_url'		=> $url,
@@ -82,7 +82,7 @@
 
 					if( !array_key_exists(trim(substr($k,0,3)),$this->plxMotor->aStats))  {
 					$group = strtr($format_group, [
-						'#group_id'		=> 'static-group-' . plxUtils::urlify($k),
+						'#group_id'	=> 'static-group-' . plxUtils::urlify($k),
 						'#group_class'	=> 'static group',
 						'#group_status'	=> ($group_active == $k) ? 'active' : 'noactive',
 						'#group_name'	=> plxUtils::strCheck($k),
