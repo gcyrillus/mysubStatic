@@ -44,7 +44,6 @@
 			$format_group = '			';
 			$format_group.=$this->getParam('format_group')=='' ? '			<span class="#group_class #group_status">#group_name</span>' : $this->getParam('format_group');
 			$format_group.=PHP_EOL;
-			$mySubstats ='';
 			
 			foreach ($plxShow->plxMotor->aStats as $k => $v) {
 				if($v['group'] !=''  and $v['group'] !='home' and array_key_exists(trim(substr($v['group'],0,3)),$plxShow->plxMotor->aStats)  ) {
