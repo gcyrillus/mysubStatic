@@ -1,35 +1,36 @@
-li[class^='menu'] .sub-menu {
-    display: none;
-    overflow-y:revert;
+li[class^='menu'] {
+  position:relative;
 }
-.open ~ .sub-menu {
-    display:block;
+li[class^='menu'] .sub-menu {
+  display: none;
+  overflow-y:revert;
+}
+.open + .sub-menu {
+  display:block;
 }
 .sub-menu .sub-menu {
-    position: static;
+  position: static;
 }
 li[class^='menu'] span {
-    display: block;
+  display: block;
 }
 li[class^='menu'] li[class^='menu'] :is(a,
 span,
 li) {
-    margin-left: 1em;
+  margin-left: 1em;
 }
 li[class^='menu'] span:before {
-    content: "\25ba ";
+  content: "\25ba ";
 }
 li[class^='menu'] span.open:before {
-    content: "\25bc ";
+  content: "\25bc ";
 }
 li[class^='menu'] .sub-menu {
-    display: none;
+  display: none;
 }
-li[class^='menu']:hover .open ~ .sub-menu {
-    display: block;
+li[class^='menu']:hover .open + .sub-menu {
+  display: block;
 }
-
-/* navigation inter statique */
 #mySubStatic {
   display:flex;
   gap:1em;
@@ -43,30 +44,28 @@ li[class^='menu']:hover .open ~ .sub-menu {
   padding:0.05rem 0.75rem;
   border-radius: 5px;
   color:white;
-  box-shadow: 1px 1px 5px #333; 
+  box-shadow: 1px 1px 5px #333;
   min-width:5em;
   text-align: center;
   transition:0.25;
   position:relative;
 }
-#mySubStatic a[rel='prev'] {  
-  box-shadow: -1px 1px 5px #333;  
+#mySubStatic a[rel='prev'] {
+  box-shadow: -1px 1px 5px #333;
 }
 #mySubStatic a:hover {
-  box-shadow: -1px -1px 5px #333; 
+  box-shadow: -1px -1px 5px #333;
   inset : 1px
 }
 #mySubStatic a[rel='prev']:hover {
-  box-shadow: 1px 1px 5px #333; 
+  box-shadow: 1px 1px 5px #333;
   inset : -1px
 }
-
 #mySubStatic a.active {
   background: gray;
   box-shadow: none;
   pointer-events: none
 }
-/* breadcrumbs */
 article.article {
   display: grid;
 }
