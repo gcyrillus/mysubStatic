@@ -51,7 +51,7 @@
 				if($v['group'] !=''  and $v['group'] !='home' and array_key_exists(trim(substr($v['group'],0,3)),$plxShow->plxMotor->aStats)  ) {
 					if ($group_active == ''  and $plxShow->staticId() == intval($k) and $v['group'] != '') 	$group_active = $v['group'];	
 					$substat =strtr($format_group, [
-					'#group_id'		=> 'static-group-' . plxUtils::urlify($k),
+					'#group_id'	=> 'static-group-' . plxUtils::urlify($k),
 					'#group_class'	=> 'static group',
 					'#group_status'	=> ($group_active == $k) ? 'active' : 'noactive',
 					'#group_name'	=> substr($v['group'],3),
@@ -67,7 +67,7 @@
 					
 					$li=  strtr($format, [
 					'#static_id'		=> 'static-' . intval($k),
-					'#static_class'		=> 'static menu',
+					'#static_class'		=> 'static menu menu-item',
 					'#static_name'		=> plxUtils::strCheck($v['name']),
 					'#static_status'	=> ($plxShow->staticId() == intval($k)) ? 'active' : 'noactive',
 					'#static_url'		=> $url,
