@@ -199,7 +199,9 @@
 				}			  
 				
 				echo self::BEGIN_CODE;
-			?>
+			?>	
+			$output = preg_replace('@li class="static menu@','li class="static menu-item',$output);
+			$output = preg_replace('@menu-item menu-item@','menu-item',$output);
 			$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>'.PHP_EOL, $output);
 			$output = str_replace('home		', ob_get_clean().'', $output);/* ?? d'où vient cette chaine ? */	
 			<?php
