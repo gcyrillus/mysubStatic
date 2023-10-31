@@ -199,19 +199,26 @@
 				}			  
 				
 				echo self::BEGIN_CODE;
-			?>	
-			$output = preg_replace('@li class="static menu@','li class="static menu-item',$output);
-			$output = preg_replace('@li class="menu"@','li class="menu menu-item has-children"',$output);
-			$output = preg_replace('@menu-item menu-item@','menu-item',$output);
+			?>
 			$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>'.PHP_EOL, $output);
-			$output = str_replace('home		', ob_get_clean().'', $output);/* ?? d'où vient cette chaine ? */	
+			//$output = str_replace('home		', ob_get_clean().'', $output);/* ?? d'où vient cette chaine ? */	
 			<?php
 				echo self::END_CODE;
 			}			  
 			
 			echo self::BEGIN_CODE;
-			?>	
-			$output = str_replace('</body>', ob_get_clean().'<script src="'.PLX_ROOT.'plugins/<?= __CLASS__ ?>/js/<?= __CLASS__ ?>.js"></script>'.PHP_EOL.'</body>', $output);
+			?>
+			$replace = [
+			   '@li class="menu menu-item@'       		=> 'li class="menu-item',
+			   '@li class="menu menu-item active@'    	=> 'li class="menu-item active',
+			   '@li class="static menu@'       			=> 'li class="static menu-item',
+			   '@li class="menu"@' 						=> 'li class="menu-item has-children"', // doublon
+			   '@menu-item menu-item@' 					=> 'menu-item',
+			   '</body>' 								=>'<script src="'.PLX_ROOT.'plugins/<?= __CLASS__ ?>/js/<?= __CLASS__ ?>.js"></script>'.PHP_EOL.'</body>' // injection du script 
+			];
+
+			$output = preg_replace(array_keys( $replace ), array_values( $replace ), $output);
+			
 			<?php
 				echo self::END_CODE;
 		}
