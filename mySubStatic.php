@@ -212,8 +212,9 @@
 			   '@li class="menu menu-item@'       		=> 'li class="menu-item',
 			   '@li class="menu menu-item active@'    	=> 'li class="menu-item active',
 			   '@li class="static menu@'       			=> 'li class="static menu-item',
-			   '@li class="menu"@' 						=> 'li class="menu-item has-children"', // doublon
-			   '@menu-item menu-item@' 					=> 'menu-item',
+			   '@li class="menu"@' 						=> 'li class="menu-item has-children"',
+			   '@class="static @' 					=> 'class="', 
+			   '@menu-item menu-item@' 					=> 'menu-item',// doublon
 			   '</body>' 								=>'<script src="'.PLX_ROOT.'plugins/<?= __CLASS__ ?>/js/<?= __CLASS__ ?>.js"></script>'.PHP_EOL.'</body>' // injection du script 
 			];
 

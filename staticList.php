@@ -23,7 +23,7 @@
 						$url = $this->plxMotor->urlRewrite('?static' . intval($k) . '/' . $v['url']);
 					$stat = strtr($format, [
 						'#static_id'		=> 'static-' . intval($k),
-						'#static_class'		=> 'menu menu-item',
+						'#static_class'		=> 'static menu menu-item',
 						'#static_name'		=> plxUtils::strCheck($v['name']),
 						'#static_status'	=> ($this->staticId() == intval($k)) ? 'active' : 'noactive',
 						'#static_url'		=> $url,
