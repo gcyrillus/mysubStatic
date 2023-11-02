@@ -7,3 +7,14 @@
   display: grid;
   grid-template-columns: 30% 1fr;
 }
+.aWizard {
+  background: yellow;
+  display: block;
+  padding: 1em;
+}
+.aWizard img {
+  mix-blend-mode: darken;
+}
+.wizard ~ p a.aWizard {
+  display: none;
+}

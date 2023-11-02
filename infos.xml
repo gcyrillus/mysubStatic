@@ -2,9 +2,9 @@
 <document>
     <title>sub static</title>
     <author>G.Cyrille</author>
-    <version>V.1.0.3.1</version>
-	<date>04/10/2023</date>
+    <version>V.2.0</version>
+	<date>01/11/2023</date>
     <site>https://re7net.com</site>
-    <description><![CDATA[permet d'afficher des sous groupe de statique au menus. Voir le fichier d'aide \ option d'affichage du fil d'ariane dans les groupes et navigation entre pages statiques de groupe de même niveau.]]></description>
-    <scope></scope>
+    <description><![CDATA[Ajoute un sous-groupe aux groupes pages statiques. <br>Plusieurs Option d'affichage<br>fil d'ariane dans les groupes<br>navigation entre pages statiques de groupe de même niveau.<br><br>Aide à la configuration à l'activation du plugin.]]></description>
+    <scope>site</scope>
 </document>

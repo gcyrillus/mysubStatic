@@ -28,10 +28,15 @@ $var['format_group'] =  $plxPlugin->getParam('format_group')=='' ? '<span class=
 $var['breadcrumbs'] = $plxPlugin->getParam('breadcrumbs')=='' ? 0 : $plxPlugin->getParam('breadcrumbs');
 $var['interlink'] = $plxPlugin->getParam('interlink')=='' ? 0 : $plxPlugin->getParam('interlink');
 
+# fermeture du wizard
+if (isset($_SESSION['justactivated'.basename(__DIR__)])) {unset($_SESSION['justactivated'.basename(__DIR__)]);}
+# affichage du wizard à la demande
+if(isset($_GET['wizard'])) {$_SESSION['justactivated'.basename(__DIR__)] = true;}
 ?>
 <style>
 	textarea {vertical-align:top;}
 </style>
+<p><a href="parametres_plugin.php?p=<?= basename(__DIR__) ?>&wizard" class="aWizard"><img src="<?= PLX_PLUGINS.basename(__DIR__)?>/img/icon.png" style="height:2em;vertical-align:middle"> Wizard</a></p>
 <p class="alert blue"><?php echo $plxPlugin->lang('L_HELP') ?> <a href="https://wiki.pluxml.org/docs/develop/plxshow.html#staticlist">DOC staticList()</a>.</p>
 <form class="inline-form" id="form_<?= basename(__DIR__) ?>" action="parametres_plugin.php?p=<?= basename(__DIR__) ?>" method="post">
 			<fieldset>

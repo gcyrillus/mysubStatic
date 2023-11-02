@@ -29,11 +29,35 @@
 			$this->addHook('plxShowStaticListBegin','plxShowStaticListBegin');
 			$this->addHook('ThemeEndBody','ThemeEndBody');
 			$this->addHook('plxShowStaticContentBegin','plxShowStaticContentBegin');
+			$this->addHook('AdminTopBottom','AdminTopBottom');
 			$this->addHook('SitemapEnd','SitemapEnd');
 			
 			
 			
 		}
+		
+		
+		
+		# Activation / desactivation
+		public function OnActivate() {
+			# activation du wizard
+			$_SESSION['justactivated'.basename(__DIR__)] = true;			
+		}
+		# page administration
+		public function AdminTopBottom() {
+			# code à executer à l’activation du plugin
+			if (isset($_SESSION['justactivated'.basename(__DIR__)])) {$this->wizard();}
+		}
+		
+		public function wizard() {
+			# affichage uniquement dans les page d'administration du plugin.
+			if(basename($_SERVER['SCRIPT_FILENAME']) =='parametres_plugins.php' || basename($_SERVER['SCRIPT_FILENAME']) =='parametres_plugin.php' || basename($_SERVER['SCRIPT_FILENAME']) =='plugin.php') {	
+				include(PLX_PLUGINS.__CLASS__.'/wizard.php');
+			}
+		}		
+		
+		
+		
 		# filtrage des statiques avec un prefixe numerique sur 3 chiffre correspondant au un group de page statique
 		public function IndexBegin() {
 			$plxShow  = plxShow::getInstance();

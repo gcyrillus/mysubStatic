@@ -1,3 +1,6 @@
+ul.menu li a {
+    width:auto;
+}
 li[class^='menu'] {
   position:relative;
 }
@@ -14,9 +17,7 @@ li[class^='menu'] .sub-menu {
 li[class^='menu'] span {
   display: block;
 }
-li[class^='menu'] li[class^='menu'] :is(a,
-span,
-li) {
+li[class^='menu'] li[class^='menu'] :is(a,span,li) {
   margin-left: 1em;
 }
 li[class^='menu'] span:before {
@@ -76,7 +77,4 @@ body.mode-static .repertory.menu.breadcrumb em {
   font-style: normal;
   color:#1568b4;
   text-decoration: underline
-}
-.repertory.menu.breadcrumb a {
-  width: auto;
 }

@@ -8,5 +8,7 @@ $LANG = array(
 'L_STAT_NAVS'				=>'Barre de navigation des pages statiques',
 'L_SHOW_BREADCRUMBS'		=>'Afficher le fil d\'Ariane dans les groupes',
 'L_SHOW_INTERLINK'			=>'Afficher les liens des autres pages du groupe',
+'L_NEXT'					=> 'Page suivante',
+'L_PREVIOUS'				=> 'Page précédente',
 );
 ?>
