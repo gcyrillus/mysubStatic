@@ -6,5 +6,5 @@
 	<date>01/11/2023</date>
     <site>https://re7net.com</site>
     <description><![CDATA[Ajoute un sous-groupe aux groupes pages statiques. <br>Plusieurs Option d'affichage<br>fil d'ariane dans les groupes<br>navigation entre pages statiques de groupe de même niveau.<br><br>Aide à la configuration à l'activation du plugin.]]></description>
-    <scope>site</scope>
+    <scope></scope>
 </document>
