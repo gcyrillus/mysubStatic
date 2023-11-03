@@ -5,144 +5,7 @@ ajoute un niveau aux groupes de pages statique
 <p>Un nom de groupe de page statique peut-être utilisé comme un groupe parent.</p>
 <p>Pour cela, votre nouvelle page statique doit avoir un nom de groupe prefixé avec l'identifiant d'une page statique ayant un  nom de groupe</p>
 <p>Par Exemples</p>
-<div class="scrollable-table" style="pointer-events:none;background:rgba(0,0,0,0.01);border:solid 1px;">
-  <table id="statics-table" class="full-width" data-rows-num='name$="_ordre"'>
-    <thead>
-      <tr>
-        <th class="checkbox"><input type="checkbox" /></th>
-        <th>N°</th>
-        <th>Page<br />d'accueil</th>
-        <th>Groupe</th>
-        <th>Titre</th>
-        <th>Url</th>
-        <th>Active</th>
-        <th>Ordre</th>
-        <th>Menu</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>☐</td>
-        <td>001</td>
-        <td>☐</td>
-        <td></td>
-        <td>Statique 1</td>
-        <td>statique-1</td>
-        <td><select id="id_001_active" name="001_active">
-            <option value="1" selected="selected">Oui</option>
-            <option value="0">Non</option>
-          </select>
-        </td>
-        <td>1</td>
-        <td><select id="id_001_menu" name="001_menu">
-            <option value="oui" selected="selected">Afficher</option>
-            <option value="non">Masquer</option>
-          </select>
-        </td>
-        <td><a href="#" title="Éditer le code source de cette page">Éditer</a>&nbsp;&nbsp;<a href="#" title="Visualiser la page Statique 1 sur le site">Voir</a></td>
-      </tr>
-      <tr style="background:rgba(0,0,0,0.1)">
-        <td>☐</td>
-        <td>002</td>
-        <td>☐</td>
-        <td>test</td>
-        <td>test</td>
-        <td>test</td>
-        <td><select id="id_002_active" name="002_active">
-            <option value="1" selected="selected">Oui</option>
-            <option value="0">Non</option>
-          </select>
-        </td>
-        <td>2</td>
-        <td><select id="id_002_menu" name="002_menu">
-            <option value="oui" selected="selected">Afficher</option>
-            <option value="non">Masquer</option>
-          </select>
-        </td>
-        <td><a href="#" title="Éditer le code source de cette page">Éditer</a>&nbsp;&nbsp;<a href="#" title="Visualiser la page test sur le site">Voir</a></td>
-      </tr>
-      <tr style="background:lightgreen">
-        <td>☐</td>
-        <td>003</td>
-        <td>☐</td>
-        <td>002sous-test</td>
-        <td>sous test</td>
-        <td>sous-test</td>
-        <td><select id="id_003_active" name="003_active">
-            <option value="1" selected="selected">Oui</option>
-            <option value="0">Non</option>
-          </select>
-        </td>
-        <td>3</td>
-        <td><select id="id_003_menu" name="003_menu">
-            <option value="oui" selected="selected">Afficher</option>
-            <option value="non">Masquer</option>
-          </select>
-        </td>
-        <td><a href="#" title="Éditer le code source de cette page">Éditer</a>&nbsp;&nbsp;<a href="#" title="Visualiser la page sous test sur le site">Voir</a></td>
-      </tr>
-      <tr  style="background:lightgreen">
-        <td>☐</td>
-        <td>005</td>
-        <td>☐</td>
-        <td>002sous-test</td>
-        <td>autre sous test</td>
-        <td>autre-sous-test</td>
-        <td><select id="id_005_active" name="005_active">
-            <option value="1" selected="selected">Oui</option>
-            <option value="0">Non</option>
-          </select>
-        </td>
-        <td>4</td>
-        <td><select id="id_005_menu" name="005_menu">
-            <option value="oui" selected="selected">Afficher</option>
-            <option value="non">Masquer</option>
-          </select>
-        </td>
-        <td><a href="#" title="Éditer le code source de cette page">Éditer</a>&nbsp;&nbsp;<a href="#" title="Visualiser la page yop sur le site">Voir</a></td>
-      </tr>
-      <tr  style="background:pink">
-        <td>☐</td>
-        <td>004</td>
-        <td>☐</td>
-        <td>001test</td>
-        <td>retest</td>
-        <td>retest</td>
-        <td><select id="id_004_active" name="004_active">
-            <option value="1" selected="selected">Oui</option>
-            <option value="0">Non</option>
-          </select>
-        </td>
-        <td>5</td>
-        <td><select id="id_004_menu" name="004_menu">
-            <option value="oui" selected="selected">Afficher</option>
-            <option value="non">Masquer</option>
-          </select>
-        </td>
-        <td><a href="#" title="Éditer le code source de cette page">Éditer</a>&nbsp;&nbsp;<a href="#" title="Visualiser la page retest sur le site">Voir</a></td>
-      </tr>
-      <tr class="new">
-        <td colspan="3">Nouvelle page</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><select id="id_006_active" name="006_active">
-            <option value="1">Oui</option>
-            <option value="0" selected="selected">Non</option>
-          </select>
-        </td>
-        <td>6</td>
-        <td><select id="id_006_menu" name="006_menu">
-            <option value="oui">Afficher</option>
-            <option value="non">Masquer</option>
-          </select>
-        </td>
-        <td>&nbsp;</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
+<img src="https://github.com/gcyrillus/mySubStatic/blob/V.3.0/img/revisited-group-statiques.png?raw=true">
   <p>Résultats</p>
   <ol>
   <li class="alert blue">La page <b>Statique 1</b> s'affiche au menu en premier niveau de façon classique</li>
@@ -156,10 +19,12 @@ ajoute un niveau aux groupes de pages statique
                * test
                ▼ sous test
                 * sous test
-                * autre sous test</pre>
+                * page de test 3</pre>
   
   <h2>Configuration et options de l'affichage</h2>
   <h3>configuration</h3>
+  <p>Un <b>WIZARD</b> s'affiche à l'activation duu plugin pour vous le présenter et vous suggérer votre premiere configuration.</p>
+  <p>Vous pouvez appeler le <b>WIZARD</b> à tout moment depuis la page de configuration du plugin.</p>
   <p>L'affichage des sous groupes reprend le format par défaut des groupes de pages statiques. Voir la documentation Officielle <a href="https://wiki.pluxml.org/docs/develop/plxshow.html#staticlist">fonction staticList()</a>.</p>
   <p>Le format des sous groupes est modifiable depuis la page "configuration" du plugin.</p>
   <h3>options</h3>
@@ -167,3 +32,11 @@ ajoute un niveau aux groupes de pages statique
     <li>Affichage d'un fil d'ariane pour les pages d'un groupe</li>
     <li>Affichage des liens entre pages de même groupe <sub>(même niveau)</sub></li>
   </ol>
+<h3>Options avançées</h3>
+<p>Le code généré par le plugin reflete la structure HTML du thème par défaut de PluXml.</p>
+<p>Il est tout à fait possible de changer cela à l'aide d'expressions régulieres.</p>
+<p>Voici celles utilisées par le plugin, elles sont modifiables et peuvent-être complétées:</p>
+<img src="https://github.com/gcyrillus/mySubStatic/blob/V.3.0/img/pregRAZ.png?raw=true">
+<p>Vous pouvez les modifier, en ajouter en retirer.</p> 
+<p>Pour retrouver la configuration par défaut de ces regex, un clique sur le bouton réinitialisé remet tout en ordre.</p>
+<p>Cdt <q>GC</q></p>
