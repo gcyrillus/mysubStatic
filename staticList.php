@@ -45,8 +45,8 @@
 							# ajout du marker.
 							$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key].='<!-- '.$this->plxMotor->aStats[substr($v['group'],0,3)]['group'].' -->';
 							# nettoyage des class par défaut de pluxml, on ne garde que menu
-							$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]=  str_replace(' noactive','',$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]);
-							$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]=  str_replace(' active','',$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]);
+							//$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]=  str_replace(' noactive','',$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]);
+							//$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]=  str_replace(' active','',$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]);
 						}
 					}
 				}

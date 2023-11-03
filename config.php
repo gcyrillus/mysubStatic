@@ -13,6 +13,16 @@ if(!empty($_POST)) {
 	$plxPlugin->setParam('format_group', $_POST['format_group'], 'cdata');
 	$plxPlugin->setParam('breadcrumbs', $_POST['breadcrumbs'], 'numeric');
 	$plxPlugin->setParam('interlink', $_POST['interlink'], 'numeric');
+	$expert_array=array();
+	foreach($_POST['expertNum'] as $expert_num) {
+		$key_name= 'pregkey-'.$expert_num;
+		if($_POST[$key_name] !='') { 
+			$expert_array[$_POST[$key_name]]=$_POST['pregval-'.$expert_num];
+		}
+	}
+
+	if(count($expert_array)>0) $plxPlugin->setParam('expert', json_encode($expert_array), 'cdata');
+	else $plxPlugin->setParam('expert', '', 'cdata');
 
 	$plxPlugin->saveParams();
 	header('Location: parametres_plugin.php?p='.basename(__DIR__));
@@ -27,6 +37,7 @@ $var['format'] =  $plxPlugin->getParam('format')=='' ? '<li class="#static_class
 $var['format_group'] =  $plxPlugin->getParam('format_group')=='' ? '<span class="#group_class #group_status">#group_name</span>' : $plxPlugin->getParam('format_group');
 $var['breadcrumbs'] = $plxPlugin->getParam('breadcrumbs')=='' ? 0 : $plxPlugin->getParam('breadcrumbs');
 $var['interlink'] = $plxPlugin->getParam('interlink')=='' ? 0 : $plxPlugin->getParam('interlink');
+$var['expert'] = $plxPlugin->getParam('expert')==$plxPlugin->defaultExpert ? '' : $plxPlugin->getParam('expert');
 
 # fermeture du wizard
 if (isset($_SESSION['justactivated'.basename(__DIR__)])) {unset($_SESSION['justactivated'.basename(__DIR__)]);}
@@ -60,6 +71,39 @@ if(isset($_GET['wizard'])) {$_SESSION['justactivated'.basename(__DIR__)] = true;
 					<label for="interlink" ><?php $plxPlugin->lang('L_SHOW_INTERLINK') ?>&nbsp;:</label>
 					<?php plxUtils::printSelect('interlink',array('1'=>L_YES,'0'=>L_NO),$var['interlink']); ?>
 				</p>
+			
+			</fieldset>
+			<hr class="alert warning">
+
+			<fieldset>
+				<legend class="alert red"><?php $plxPlugin->lang('L_CONFIG_EXPERT') ?></legend>
+				<table data-rows-num='name$="_ordre"' id="pregR">
+					<thead>
+						<tr>
+							<th>rechercher</th><td>=></td><th>Remplacer par</th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php 
+					$i=0;
+					foreach($plxPlugin->defaultExpert as $k => $v) {
+					$i++;
+					echo "<tr>
+						<td><input type='hidden' name='expertNum[]' value='$i'><input id='pregkey-$i' name='pregkey-$i' value='$k' type='text' class='reset' ></td>
+						<td>=></td>
+						<td><input id='pregval-$i' name='pregval-$i' value='$v' type='text' class='reset' ></td>
+					</tr>".PHP_EOL;
+					}
+					
+					?>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td><input type='hidden' name='expertNum[]' value='<?= $i + 1 ?>'><input id='pregkey-<?= $i + 1 ?>' name='pregkey-<?= $i + 1 ?>' placeholder='Rechercher'></td><td>=></td><td><input id='pregval-<?= $i + 1 ?>' name='pregval-<?= $i + 1 ?>' placeholder='Remplacer par'></td>
+						</tr>
+					</tfoot>
+				</table>
+			<button onclick="let iptreset =document.querySelectorAll('input.reset');for (let i = 0; i < iptreset.length; i++) {iptreset[i].value='';}">réinitialiser</button>
 			
 			</fieldset>
 		<p class="in-action-bar">

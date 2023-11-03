@@ -1,16 +1,16 @@
 <?php
 	if(!defined('PLX_ROOT')) exit; 
 	
-# pas d'affichage dans un autre plugin !	
-if(isset($_GET['p'])&& $_GET['p'] !== basename(__DIR__ ) ) {goto end;}
-
+	# pas d'affichage dans un autre plugin !	
+	if(isset($_GET['p'])&& $_GET['p'] !== basename(__DIR__ ) ) {goto end;}
+	
 	# on charge la class du plugin pour y accéder
 	$plxMotor = plxMotor::getInstance();
 	$plxPlugin = $plxMotor->plxPlugins->getInstance(basename(__DIR__ )); 
 	
 	# On vide la valeur de session qui affiche le Wizard maintenant qu'il est visible.
 	if (isset($_SESSION['justactivated'.basename(__DIR__)])) {unset($_SESSION['justactivated'.basename(__DIR__)]);}
-
+	
 	# initialisation des variables propres à chaque lanque 
 	$langs = array();
 	
@@ -41,7 +41,7 @@ if(isset($_GET['p'])&& $_GET['p'] !== basename(__DIR__ ) ) {goto end;}
 		<form action="parametres_plugin.php?p=<?php echo basename(__DIR__ ) ?>"  method="post">
 			<div role="tab-list">		
 				<div role="tabpanel" id="tab1" class="tabpanel">
-					<h2>Bienvenue dans l’extension <?= $plxPlugin->aInfos['title']?></h2>					
+					<h2>Bienvenue dans l’extension <b style="font-family:cursive;color:crimson;font-variant:small-caps;font-size:2em;vertical-align:-.5rem;display:inline-block;"><?= $plxPlugin->aInfos['title']?></b></h2>					
 					<p>Merci de  l'avoir choisie.</p>
 					<p>Dans ce court tutoriel, nous allons vous presenter cette extension et vous guider à travers quelques-uns des réglages de base pour en tirer le meilleur parti.</p>
 					
@@ -54,13 +54,13 @@ if(isset($_GET['p'])&& $_GET['p'] !== basename(__DIR__ ) ) {goto end;}
 					<h3>Pour créer un sous-groupe</h3>
 					<p>Pour cela, votre nouvelle page statique doit avoir un nom de groupe <em>prefixé avec l'identifiant</em> de la page statique de groupe à laquelle vous voulez l'attachée.<br><sub>C'est la seule modification à faire en dehors de la configuration de l'extension.</sub></p>
 					<p>Par Exemples:<br>
-						<img src="<?= PLX_PLUGINS.basename(__DIR__ )?>/img/group-statiques.png" >
+						<img src="<?= PLX_PLUGINS.basename(__DIR__ )?>/img/revisited-group-statiques.png" >
 					</p>
 					<dl>
 						<dt>Legende :</dt>
-						<dd><span class="bspan gray">gray</span> Une page statique de groupe <sup>fonction native de PluXml</sup></dd>
-						<dd><span class="bspan green">green</span> Une page statique de sous groupe valide <sup>Un Groupe prefixé devient un sous-groupe<br> uniquement si le plugin est activé </sup></dd>
-						<dd><span class="bspan red">red</span> Une page de sous groupe <b>invalide</b> car le préfixe n'a pas de numéro de correspondance.</dd>
+						<dd><span class="bspan corn">Groupe</span> Une page statique de groupe <sup>fonction native de PluXml</sup></dd>
+						<dd><span class="bspan azur"><b style="color:hotpink">↷</b> Grpoupe</span> Une page statique en sous groupe <sup>attaché à l'identifiant <br>d'un groupe de premier niveau.</sup></dd>
+						<dd><span class="bspan gray">gray</span> Une nouvelle page peut-etre rattaché à un groupe parent existant à sa création.</dd>
 					</dl>
 					
 				</div>	
@@ -77,7 +77,7 @@ if(isset($_GET['p'])&& $_GET['p'] !== basename(__DIR__ ) ) {goto end;}
 				</div>		
 				<div role="tabpanel" id="tab6" class="tabpanel hidden title">
 					<h2>Cooconing</h2>
-					<p>Lier vos pages similaires entre elles.</p>
+				<p>Lier vos pages similaires entre elles.</p>
 				</div>
 				<div role="tabpanel" id="tab7" class="tabpanel hidden">
 					<p>Cette option de configuration affiche les liens entre pages statiques de même groupe.</p>
@@ -109,7 +109,19 @@ if(isset($_GET['p'])&& $_GET['p'] !== basename(__DIR__ ) ) {goto end;}
 					
 					
 				</div>								
-				<div role="tabpanel" id="tab10" class="tabpanel hidden">
+				<div role="tabpanel" id="tab10" class="tabpanel hidden title">
+					<h2>Configuration avançée</h2>
+					<p>Ajoutez, enlevez des class ou autres ...</p>
+					
+				</div>										
+				<div role="tabpanel" id="tab11" class="tabpanel hidden">
+					<p class="alert warning">Cette partie s'adresse aux experts et plus téméraires</p>
+					<p class="alert green">Si vous faite une erreur, cliquer le bouton <b><em>réinitialiser</em></b> pour retrouver la configuration par défaut.</p>
+					<p>Visuel :<br><img src="<?= PLX_PLUGINS.basename(__DIR__ )?>/img/pregRaz.png" ></p>
+					<p>Cette partie vous permet de gérer les class attribuées aux éléments de menu, cela vous permet d'utiliser vos class personnelles où celle de Bootstrap, entre autre possibilité.</p>
+					<p>Dans la premiere colonne se trouve une regex pour rechercher la chaine de code à modifier, la seconde colonne correspond à la modification que vous souhaitez obtenir. Les modifications dépassent la portée du menu et il n'y a pas de limite à ce que vous pouvez modifier et injecter. Soyez prudent et ingénieux.</p>
+				</div>										
+				<div role="tabpanel" id="tab12" class="tabpanel hidden">
 					<h2>FIN</h2>
 					<p>Ce dictatoriel est fini, vous pouvez enregistrer votre configuration.</p>
 					
