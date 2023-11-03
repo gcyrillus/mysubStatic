@@ -1,20 +1,39 @@
 #form_mySubStatic fieldset,
 #form_mySubStaticlegend {
-  padding:revert;
-  border:revert;
+    padding:revert;
+    border:revert;
 }
 #form_mySubStatic p {
-  display: grid;
-  grid-template-columns: 30% 1fr;
-}
-.aWizard {
-  background: yellow;
-  display: block;
-  padding: 1em;
-}
-.aWizard img {
-  mix-blend-mode: darken;
-}
-.wizard ~ p a.aWizard {
-  display: none;
-}
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    }
+    .aWizard {
+        background: yellow;
+        display: block;
+        padding: 1em;
+    }
+    .aWizard img {
+        mix-blend-mode: darken;
+    }
+    .wizard ~ p a.aWizard {
+        display: none;
+    }
+    #pregR {
+        margin:auto;
+        border:solid 1px;
+    }
+    #pregR input {
+        width:20em;
+    }
+    #pregR thead{
+        background:#bee;
+    }
+    #pregR tfoot{
+        background:#eeb;
+    }
+    
+    @media (max-width:900px) {	
+        #pregR input {
+            width:auto;
+        }    
+    }                

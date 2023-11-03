@@ -7,7 +7,12 @@
 	class mySubStatic extends plxPlugin {
         const BEGIN_CODE = '<?php' . PHP_EOL;
         const END_CODE = PHP_EOL . '?>';
-		public $subs;		
+		public $subs;
+		public $defaultExpert = array(
+				'@li class="static menu@'	=> 'li class="static menu-item',
+				'@li class="menu"@'			=> 'li class="menu menu-item has-children"',
+				'@menu-item menu-item@'		=> 'menu-item'
+	);
 		
 		/**
 			* Constructeur de la classe
@@ -32,7 +37,8 @@
 			$this->addHook('AdminTopBottom','AdminTopBottom');
 			$this->addHook('SitemapEnd','SitemapEnd');
 			
-			
+
+			$this->defaultExpert=json_decode($this->getParam('expert'),true)== '' ? $this->defaultExpert : json_decode($this->getParam('expert'),true);			
 			
 		}
 		
@@ -221,20 +227,26 @@
 						$html .='			</ul>'.PHP_EOL;
 					}
 				}			  
-				
-				echo self::BEGIN_CODE;
-			?>	
-			$output = preg_replace('@li class="static menu@','li class="static menu-item',$output);
-			$output = preg_replace('@li class="menu"@','li class="menu menu-item has-children"',$output);
-			$output = preg_replace('@menu-item menu-item@','menu-item',$output);
-			$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>'.PHP_EOL, $output);
-			$output = str_replace('home		', ob_get_clean().'', $output);/* ?? d'où vient cette chaine ? */	
-			<?php
+				$pregArray=json_encode($this->defaultExpert);
+				$reformat=array(
+				'@{@'	=>	'(',
+				'@}@'=>	')'.PHP_EOL,
+				'@:@'	=>	'=>'
+				);
+				$pregArrayjs = preg_replace(array_keys( $reformat ), array_values( $reformat ), $pregArray);
+
+					echo self::BEGIN_CODE;
+				?>	
+				$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>'.PHP_EOL, $output);
+				$output = str_replace('home		', ob_get_clean().'', $output);/* ?? d'où vient cette chaine ? */	
+				<?php
 				echo self::END_CODE;
 			}			  
-			
+			# nettoyage final
 			echo self::BEGIN_CODE;
 			?>	
+			$replace= <?= 'array'.$pregArrayjs  ?>;
+			$output = preg_replace(array_keys( $replace ), array_values( $replace ), $output);
 			$output = str_replace('</body>', ob_get_clean().'<script src="'.PLX_ROOT.'plugins/<?= __CLASS__ ?>/js/<?= __CLASS__ ?>.js"></script>'.PHP_EOL.'</body>', $output);
 			<?php
 				echo self::END_CODE;

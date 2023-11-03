@@ -140,7 +140,9 @@ span.tab.active ~ span.tab {
 	grid-column:1;
 	grid-row:1/4;
 	text-align:center;
-	border-inline-end:  solid 2px ghostwhite;	
+	border-inline-end:  solid 2px ghostwhite;
+	background:url(../img/grass.png) 100% 100% no-repeat, url(../img/gcyrillus.png).5em .5em / 3em 3em  no-repeat;
+	padding-bottom:3em;
 }
 .idConfig {
 	color: gray;
@@ -171,6 +173,9 @@ span.tab.active ~ span.tab {
 }
 #closeWizard:checked ~ .wizard {
 	display:none;
+}
+#closeWizard:checked ~ p a.aWizard {
+  display: block;
 }
 .title-wizard img {
 	width: 100px;
@@ -245,7 +250,7 @@ span.tab.active ~ span.tab {
 	.title-wizard {
 		display: flex;
 		align-items: center;
-		background: #eee;
+		box-shadow:inset 0 0 30vw #eeea;
 		margin:-1.4em -1.4em 0;
 		padding:0.25em
 	}
