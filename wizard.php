@@ -111,16 +111,16 @@
 				</div>								
 				<div role="tabpanel" id="tab10" class="tabpanel hidden title">
 					<h2>Configuration avançée</h2>
-					<p>Ajouter/enlever des class et autres ...</p>
+					<p>Ajoutez, enlevez des class ou autres ...</p>
 					
 				</div>										
 				<div role="tabpanel" id="tab11" class="tabpanel hidden">
-					<p class="alert warning">Cette partie s'adresse aux expert et plus téméraires</p>
-					<p class="alert green">si vous faite une erreur, cliqué le bouton <b><em>réinitialiser</em></b> pour retrouver la configuration par défaut.</p>
+					<p class="alert warning">Cette partie s'adresse aux experts et plus téméraires</p>
+					<p class="alert green">Si vous faite une erreur, cliquer le bouton <b><em>réinitialiser</em></b> pour retrouver la configuration par défaut.</p>
 					<p>Visuel :<br><img src="<?= PLX_PLUGINS.basename(__DIR__ )?>/img/pregRaz.png" ></p>
-					<p>Cette partie vous permet de gérer les class attribuées aux éléments de menu, cela vous permet d'utilisé vos class personnelles où celle de Bootstrap entre autre possibilité.</p>
-					<p>Dans la premiere colonne se trouve une regex pour rechercher la chaine de code à modifier, la seconde colonne correspond à la modification que vous souhaitez obtenir. Les modifications dépasse la portée du menu et il n'y a pas de limite à ce que vous pouvez modifier et injecter, soyez prudent et ingénieux.</p>
-				</div>										
+					<p>Cette partie vous permet de gérer les class attribuées aux éléments de menu, cela vous permet d'utiliser vos class personnelles où celle de Bootstrap, entre autre possibilité.</p>
+					<p>Dans la premiere colonne se trouve une regex pour rechercher la chaine de code à modifier, la seconde colonne correspond à la modification que vous souhaitez obtenir. Les modifications dépassent la portée du menu et il n'y a pas de limite à ce que vous pouvez modifier et injecter. Soyez prudent et ingénieux.</p>
+				</div>								
 				<div role="tabpanel" id="tab12" class="tabpanel hidden">
 					<h2>FIN</h2>
 					<p>Ce dictatoriel est fini, vous pouvez enregistrer votre configuration.</p>
