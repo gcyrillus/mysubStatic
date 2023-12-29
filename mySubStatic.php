@@ -214,6 +214,7 @@
 		
 		# reinjection des sous statiques
 		public function ThemeEndBody() {
+		   if(count($this->subs)>0) {
 			foreach($this->subs as $sub => $li) {
 				$html='';
 				$name=$sub;
@@ -251,6 +252,7 @@
 			$output = str_replace('</body>', ob_get_clean().'<script src="'.PLX_ROOT.'plugins/<?= __CLASS__ ?>/js/<?= __CLASS__ ?>.js"></script>'.PHP_EOL.'</body>', $output);
 			<?php
 				echo self::END_CODE;
+		   }
 		}
 		
 /////////////////////////////////////////////////////////////////		
