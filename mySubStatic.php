@@ -223,6 +223,7 @@
 						$html .= $k.'			<ul class="sub-menu">'.PHP_EOL;				
 						if(is_array($val)) {
 							foreach($val as $sub => $v) {
+								$v = str_replace("'", "&rsquo;", $v);
 								$html .= $v;
 							}
 						}
