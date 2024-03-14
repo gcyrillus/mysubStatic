@@ -2,11 +2,13 @@
 
 /**
  * Plugin MysubStatic
- * Clone et remplacce l'édition des pages statiques
+ * Clone et remplace l'édition des pages statiques
  *
  * @package PLX
  * @author	Stephane F, Florent MONTHEL et Griboval Cyrille
- * @adaptation G.Cyrille Nov . 2023
+ * @adaptation G.Cyrille 
+ * @ version v3.0.1
+ * @ date 14/03/2024
 */
 # Control de l'accès à la page en fonction du profil de l'utilisateur connecté
 $plxAdmin->checkProfil(PROFIL_ADMIN, PROFIL_MANAGER);
@@ -82,9 +84,7 @@ function checkBox(cb) {
 					$selected = $plxAdmin->aConf['homestatic']==$k ? ' checked="checked"' : '';
 					echo '<input title="'.L_STATICS_PAGE_HOME.'" type="checkbox" name="homeStatic[]" value="'.$k.'"'.$selected.' onclick="checkBox(\''.$ordre.'\')" />'.PHP_EOL;
 					echo '</td>'.PHP_EOL.'<td>'.PHP_EOL;;
-					
-					
-					//// substr(plxUtils::strCheck($v['group']), 3)
+
 					if (is_numeric(substr(plxUtils::strCheck($v['group']),0,3))) {
 						plxUtils::printInput($k.'_group', plxUtils::strCheck($v['group']), 'hidden', '-100');
 						plxUtils::printInput($k.'_group_cleaned',substr(plxUtils::strCheck($v['group']), 3), 'text', '-100');
@@ -100,10 +100,6 @@ function checkBox(cb) {
 					plxUtils::printInput($k.'_group_sub', '', 'text', '-30');
 					
 					}
-					
-					
-					
-					
 					
 					echo '</td>'.PHP_EOL.'<td>'.PHP_EOL;;
 					plxUtils::printInput($k.'_name', plxUtils::strCheck($v['name']), 'text', '-255');
@@ -210,7 +206,6 @@ function update(el, rel, groupe) {
   el.value = newval;
   console.log(newval);
 }
-
 </script>
 <?php
 # Hook Plugins

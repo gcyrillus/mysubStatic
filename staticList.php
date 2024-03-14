@@ -13,7 +13,9 @@
 
 		$group_active = '';
 		if ($this->plxMotor->aStats) {
+		$xmlStatList = simplexml_load_file(PLX_ROOT . PLX_CONFIG_PATH . 'statiques.xml');
 			foreach ($this->plxMotor->aStats as $k => $v) {
+			$children='';
 				if ($v['active'] == 1 and $v['menu'] == 'oui') { # La page  est bien active et dispo ds le menu
 					if ($v['url'][0] == '?') # url interne commençant par ?
 						$url = $this->plxMotor->urlRewrite($v['url']);
@@ -21,9 +23,12 @@
 						$url = $v['url'];
 					else # url page statique
 						$url = $this->plxMotor->urlRewrite('?static' . intval($k) . '/' . $v['url']);
+					# contient-elle un sous-groupe ?
+					$subGroup = $xmlStatList->xpath('//document/statique/group[starts-with(., "'.$k.'")]');
+					if(isset($subGroup[0])) $children =' has-children ';
 					$stat = strtr($format, [
 						'#static_id'		=> 'static-' . intval($k),
-						'#static_class'		=> 'static menu menu-item',
+						'#static_class'		=> 'static menu menu-item'.$children,
 						'#static_name'		=> plxUtils::strCheck($v['name']),
 						'#static_status'	=> ($this->staticId() == intval($k)) ? 'active' : 'noactive',
 						'#static_url'		=> $url,
@@ -89,7 +94,7 @@
 					]).PHP_EOL;
 ?>
 
-<li class="menu">
+<li class="menu has-children">
 		<?= $group ?>
 		<ul id="static-<?= plxUtils::urlify($k) ?>" class="sub-menu">
 		<?= implode("\t\t" . PHP_EOL, $v); ?>

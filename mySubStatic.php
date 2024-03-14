@@ -8,10 +8,9 @@
         const BEGIN_CODE = '<?php' . PHP_EOL;
         const END_CODE = PHP_EOL . '?>';
 		public $subs;
+		# exemple par défaut
 		public $defaultExpert = array(
-				'@li class="static menu@'	=> 'li class="static menu-item',
-				'@li class="menu"@'			=> 'li class="menu menu-item has-children"',
-				'@menu-item menu-item@'		=> 'menu-item'
+				'@li class="static menu@'	=> 'li class="static menu-item mySubStatic'
 	);
 		
 		/**
@@ -35,15 +34,11 @@
 			$this->addHook('ThemeEndBody','ThemeEndBody');
 			$this->addHook('plxShowStaticContentBegin','plxShowStaticContentBegin');
 			$this->addHook('AdminTopBottom','AdminTopBottom');
-			$this->addHook('SitemapEnd','SitemapEnd');
 			$this->addHook('AdminStaticsPrepend','AdminStaticsPrepend');
 			
-
 			$this->defaultExpert=json_decode($this->getParam('expert'),true)== '' ? $this->defaultExpert : json_decode($this->getParam('expert'),true);			
 			
 		}
-		
-		
 		
 		# Activation / desactivation
 		public function OnActivate() {
@@ -62,8 +57,6 @@
 				include(PLX_PLUGINS.__CLASS__.'/wizard.php');
 			}
 		}		
-		
-		
 		
 		# filtrage des statiques avec un prefixe numerique sur 3 chiffre correspondant au un group de page statique
 		public function IndexBegin() {
@@ -241,7 +234,6 @@
 					echo self::BEGIN_CODE;
 				?>	
 				$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>'.PHP_EOL, $output);
-				//$output = str_replace('home		', ob_get_clean().'', $output);/* ?? d'où vient cette chaine ? */	
 				<?php
 				echo self::END_CODE;
 			}			  
@@ -256,9 +248,7 @@
 		   }
 		}
 		
-/////////////////////////////////////////////////////////////////		
-	public function AdminStaticsPrepend() {
-		
+	public function AdminStaticsPrepend() {		
 		echo self::BEGIN_CODE;
 		?>
 		$plgPlugin = $plxAdmin->plxPlugins->aPlugins['<?= __CLASS__ ?>'];
@@ -282,17 +272,4 @@
 <?php
 		echo self::END_CODE;
 	}
-			
-		
-		
-////////////////////////////////////////////////		
-
-		#nettoyage sitemap.php 
-		public function SitemapEnd() {			  
-			echo self::BEGIN_CODE;
-			?>
-			$output = str_replace('home		', ob_get_clean().'', $output);/* ?? d'où vient cette chaine ? */
-			<?php
-			echo self::END_CODE;		
-		}
 }

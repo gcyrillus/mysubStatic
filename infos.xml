@@ -2,9 +2,16 @@
 <document>
     <title>sub static</title>
     <author>G.Cyrille</author>
-    <version>V.3.0</version>
-	<date>03/11/2023</date>
+    <version>3.0.1</version>
+	<date>14/03/2024</date>
     <site>https://re7net.com</site>
-    <description><![CDATA[Ajoute la possibilité de créer des sous-groupe aux groupes pages statiques. <br>Plusieurs Option d'affichage<br>fil d'ariane dans les groupes<br>navigation entre pages statiques de groupe de même niveau.<br><br>Aide à la configuration à l'activation du plugin.]]></description>
+    <description><![CDATA[Ajoute la possibilité de créer des sous-groupe aux groupes pages statiques. 
+    Injecte une class "has-children" aux listes de groupes.
+        Plusieurs Option d'affichage
+        - fil d'ariane dans les groupes
+        - navigation entre pages statiques de groupe de même niveau.
+        
+        - Aide à la configuration à l'activation du plugin.
+        - La configuration avancée vous permet d'injecter vos propres regex, stockées au format json. A n'utiliser uniquement si vous savez ce que vous faites. La portées est sur tout le code de la page affichée!]]></description>
     <scope></scope>
 </document>
