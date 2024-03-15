@@ -32,6 +32,19 @@ li[class^='menu'] .sub-menu {
 li[class^='menu']:hover .open + .sub-menu {
   display: block;
 }
+.has-children .has-children :is(.open,
+.open + ul) {
+  background:lightblue;
+  color: #333;
+  margin-bottom:0;
+}
+.menu .has-children .has-children :is(.open,
+.open + ul) li,
+.has-children .has-children :is(.open,
+.open + ul) li a {
+  background:none ;
+  color:inherit;
+
 #mySubStatic {
   display:flex;
   gap:1em;
