@@ -7,8 +7,8 @@
  * @package PLX
  * @author	Stephane F, Florent MONTHEL et Griboval Cyrille
  * @adaptation G.Cyrille 
- * @ version v3.0.1
- * @ date 14/03/2024
+ * @ version v3.0.2
+ * @ date 23/03/2024
 */
 # Control de l'accès à la page en fonction du profil de l'utilisateur connecté
 $plxAdmin->checkProfil(PROFIL_ADMIN, PROFIL_MANAGER);

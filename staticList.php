@@ -1,4 +1,13 @@
 <?php
+	/**
+		* Plugin 	mySubStatic
+		* @version 3.0.2
+		* @author	Cyrille G.  @ re7net.com
+		* pages statique à deux niveaux
+	**/	
+	
+		$plugin = $this->plxMotor->plxPlugins->getInstance('mySubStatic');	
+		$format_group = $plugin->format_group ;
 		$home = ((empty($this->plxMotor->get) or preg_match('/^page[0-9]*/', $this->plxMotor->get)) and basename($_SERVER['SCRIPT_NAME']) == "index.php");
 		# Si on a la variable extra, on affiche un lien vers la page d'accueil (avec $extra comme nom)
 		if ($extra != '') {
@@ -15,7 +24,8 @@
 		if ($this->plxMotor->aStats) {
 		$xmlStatList = simplexml_load_file(PLX_ROOT . PLX_CONFIG_PATH . 'statiques.xml');
 			foreach ($this->plxMotor->aStats as $k => $v) {
-			$children='';
+				$sub = is_numeric(substr($v['group'],0,3));
+				$children='';
 				if ($v['active'] == 1 and $v['menu'] == 'oui') { # La page  est bien active et dispo ds le menu
 					if ($v['url'][0] == '?') # url interne commençant par ?
 						$url = $this->plxMotor->urlRewrite($v['url']);
@@ -25,7 +35,7 @@
 						$url = $this->plxMotor->urlRewrite('?static' . intval($k) . '/' . $v['url']);
 					# contient-elle un sous-groupe ?
 					$subGroup = $xmlStatList->xpath('//document/statique/group[starts-with(., "'.$k.'")]');
-					if(isset($subGroup[0])) $children =' has-children ';
+					if(isset($subGroup[0]) && $sub !== '1' ) $children =' has-children ';
 					$stat = strtr($format, [
 						'#static_id'		=> 'static-' . intval($k),
 						'#static_class'		=> 'static menu menu-item'.$children,

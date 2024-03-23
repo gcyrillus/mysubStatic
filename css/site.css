@@ -1,5 +1,5 @@
 ul.menu li a {
-    width:auto;
+  width:auto;
 }
 li[class^='menu'] {
   position:relative;
@@ -13,11 +13,14 @@ li[class^='menu'] .sub-menu {
 }
 .sub-menu .sub-menu {
   position: static;
+  margin-bottom:2px;
 }
 li[class^='menu'] span {
   display: block;
 }
-li[class^='menu'] li[class^='menu'] :is(a,span,li) {
+li[class^='menu'] li[class^='menu'] :is(a,
+span,
+li) {
   margin-left: 1em;
 }
 li[class^='menu'] span:before {
@@ -32,15 +35,14 @@ li[class^='menu'] .sub-menu {
 li[class^='menu']:hover .open + .sub-menu {
   display: block;
 }
-.has-children .has-children :is(.open, .open + ul) {
+.sub-menu>li>a {
+  margin-left:1.2em;
+}
+.sub-menu:has(.open)  .open ,
+.sub-menu:has(.open)  .open + ul * {
   background:lightblue;
   color: #333;
   margin-bottom:0;
-}
-.menu .has-children .has-children :is(.open, .open + ul) li,
-.has-children .has-children :is(.open, .open + ul) li a {
-  background:none ;
-  color:inherit;
 }
 article.article {
   display: grid;
