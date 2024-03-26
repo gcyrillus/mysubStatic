@@ -7,8 +7,8 @@
  * @package PLX
  * @author	Stephane F, Florent MONTHEL et Griboval Cyrille
  * @adaptation G.Cyrille 
- * @ version v3.0.2
- * @ date 23/03/2024
+ * @ version v3.0.3
+ * @ date 26/03/2024
 */
 # Control de l'accès à la page en fonction du profil de l'utilisateur connecté
 $plxAdmin->checkProfil(PROFIL_ADMIN, PROFIL_MANAGER);
@@ -96,7 +96,7 @@ function checkBox(cb) {
 					plxUtils::printInput($k.'_group_sub', substr(plxUtils::strCheck($v['group']),0,3), 'text', '-30');
 					}
 					else {
-					 if($v['group'] !='' && $plxAdmin->aConf['homestatic']!=$k) $parentGroup[]=$k;
+					 if($v['group'] !='' && $plxAdmin->aConf['homestatic']!=$k && !isset($parentGroup[$v['group']])) $parentGroup[$v['group']]=$k;
 					plxUtils::printInput($k.'_group_sub', '', 'text', '-30');
 					
 					}
@@ -144,8 +144,8 @@ function checkBox(cb) {
 						plxUtils::printInput($new_staticid.'_group', '', 'hidden', '-100');
 						plxUtils::printInput($new_staticid.'_group_cleaned', '', 'text', '-100');
 						echo '</td>'.PHP_EOL.'<td class="subgroup">'.PHP_EOL;;
-						foreach($parentGroup as $g ) {
-						 $option .="<option value=$g >$g</option>".PHP_EOL;;
+						foreach($parentGroup as $g => $num) {
+						 $option .="<option value=$num >$num</option>".PHP_EOL;;
 						}
 						echo '<select name="substatics">'.$option.'</select>'.PHP_EOL;
 						echo '</td>'.PHP_EOL.'<td>';

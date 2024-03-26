@@ -1,7 +1,7 @@
 <?php
 	/**
 		* Plugin 	mySubStatic
-		* @version 3.0.2
+		* @version 3.0.3
 		* @author	Cyrille G.  @ re7net.com
 		* pages statique à deux niveaux
 	**/
@@ -102,7 +102,7 @@
 					'#static_status'	=> ($plxShow->staticId() == intval($k)) ? 'active' : 'noactive',
 					'#static_url'		=> $url,
 					]);
-					$mySubstats[$plxShow->plxMotor->aStats[substr($v['group'],0,3)]['group']][$substat][]= $li;
+					$mySubstats[substr($v['group'],0,3)][$substat][]= $li;
 				}
 			}
 			$this->subs = $mySubstats;
@@ -210,7 +210,8 @@
             echo self::END_CODE;			
 		}
 		
-		
+		/* 	
+			*/
 		# reinjection des sous statiques
 		public function ThemeEndBody() {
 			if(count($this->subs)>0) {
@@ -238,8 +239,8 @@
 					$pregArrayjs = preg_replace(array_keys( $reformat ), array_values( $reformat ), $pregArray);
 					
 					echo self::BEGIN_CODE;
-				?>	
-			$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>'.PHP_EOL, $output);
+				?>
+				$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>'.PHP_EOL, $output);
 			<?php
 				echo self::END_CODE;
 			}			  

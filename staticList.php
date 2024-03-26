@@ -1,11 +1,10 @@
 <?php
 	/**
 		* Plugin 	mySubStatic
-		* @version 3.0.2
+		* @version 3.0.3
 		* @author	Cyrille G.  @ re7net.com
 		* pages statique à deux niveaux
 	**/	
-	
 		$plugin = $this->plxMotor->plxPlugins->getInstance('mySubStatic');	
 		$format_group = $plugin->format_group ;
 		$home = ((empty($this->plxMotor->get) or preg_match('/^page[0-9]*/', $this->plxMotor->get)) and basename($_SERVER['SCRIPT_NAME']) == "index.php");
@@ -50,20 +49,21 @@
 					if ($group_active == '' and $home === false and $this->staticId() == intval($k) and $v['group'] != '')
 						$group_active = $v['group'];
 					# est ce un sous groupe ?
-					if(isset($this->plxMotor->aStats[substr($v['group'],0,3)]['group']) and $this->plxMotor->aStats[substr($v['group'],0,3)]['group'] !='' and $this->plxMotor->aStats[substr($v['group'],0,3)]['menu'] =='oui') {
+					if(isset(
+					$this->plxMotor->aStats[substr($v['group'],0,3)]['group']) 
+					and $this->plxMotor->aStats[substr($v['group'],0,3)]['group'] !='' 
+					and $this->plxMotor->aStats[substr($v['group'],0,3)]['menu'] =='oui'
+					) 	{
 					
 						# insertion du marker de sous-groupe dans le menu
-						if(!isset($found[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']])) {// test si déjà vu
-							$found[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']] ='set';
-							end($menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']]);
-							$key = key($menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']]);	
-							# ajout du marker.
-							$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key].='<!-- '.$this->plxMotor->aStats[substr($v['group'],0,3)]['group'].' -->';
-							# nettoyage des class par défaut de pluxml, on ne garde que menu
-							//$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]=  str_replace(' noactive','',$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]);
-							//$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]=  str_replace(' active','',$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key]);
+							if(!isset($found[substr($v['group'],0,3)])) {// test si déjà vu
+								$found[substr($v['group'],0,3)] ='set';
+								end($menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']]);
+								$key = key($menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']]);	
+								# ajout du marker.
+								$menus[$this->plxMotor->aStats[substr($v['group'],0,3)]['group']][$key].='<!-- '.substr($v['group'],0,3).' -->';
+							}
 						}
-					}
 				}
 			}
 		}

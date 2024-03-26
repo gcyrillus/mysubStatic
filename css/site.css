@@ -13,7 +13,6 @@ li[class^='menu'] .sub-menu {
 }
 .sub-menu .sub-menu {
   position: static;
-  margin-bottom:2px;
 }
 li[class^='menu'] span {
   display: block;
@@ -38,11 +37,31 @@ li[class^='menu']:hover .open + .sub-menu {
 .sub-menu>li>a {
   margin-left:1.2em;
 }
-.sub-menu:has(.open)  .open ,
-.sub-menu:has(.open)  .open + ul * {
+.has-children .has-children :is(.open,
+.open + ul) {
   background:lightblue;
   color: #333;
   margin-bottom:0;
+}
+.has-children .has-children :is(.open,
+.open + ul)>li,
+.has-children .has-children :is(.open,
+.open + ul) li a {
+  background:none;
+  color:inherit;
+}
+
+.sub-menu span.static, .sub-menu .sub-menu {
+  padding-inline-start: 1.2em
+}
+.sub-menu .has-children a {
+  margin-inline-start:0;
+  border-bottom: solid #258fd6 2px;
+  display:inline-block;
+}
+ .has-children .has-children   {
+   text-decoration:underline;
+  background:linear-gradient(#258fd6,#258fd6) 1.5em 2em / 2px calc(100% - 2.5em) no-repeat white
 }
 article.article {
   display: grid;
