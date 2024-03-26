@@ -161,7 +161,8 @@
 				<ul class="repertory menu breadcrumb">
 					<li><a href="'.$this->plxMotor->urlRewrite().'">'.$this->getLang('HOME').'</a></li>'.PHP_EOL;
 					if(array_key_exists(trim(substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)),$this->plxMotor->aStats)) {
-					$breacrumbs.= '					<li><a href="'.$this->plxMotor->urlRewrite('?static' . intval(substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)) . '/'.$this->plxMotor->aStats[substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)]['url']).'">'.$this->plxMotor->aStats[substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)]['group'].'</a></li>
+					$breacrumbs.= '					<li>'.$this->plxMotor->aStats[substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)]['group'].'</li>
+					<li><a href="'.$this->plxMotor->urlRewrite('?static' . intval(substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)) . '/'.$this->plxMotor->aStats[substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)]['url']).'">'.$this->plxMotor->aStats[substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)]['name'].'</a></li>
 					<li>'.substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],3).'</li>'.PHP_EOL;
 					}
 					else {
