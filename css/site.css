@@ -58,6 +58,7 @@ li[class^='menu']:hover .open + .sub-menu {
   margin-inline-start:0;
   border-bottom: solid #258fd6 2px;
   display:inline-block;
+  background:white
 }
  .has-children .has-children   {
    text-decoration:underline;
