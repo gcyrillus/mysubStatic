@@ -82,3 +82,41 @@ body.mode-static .repertory.menu.breadcrumb em {
   color:#1568b4;
   text-decoration: underline
 }
+/* sub navigation in between statique of same level */
+
+#mySubStatic {
+  display:flex;
+  gap:1em;
+  padding:0.5em 1em;
+  margin: 0.5em 0;
+  justify-content: center;
+  border-block: double gray
+}
+
+#mySubStatic a {
+  background:#3FAEE9;
+  padding:0.05rem 0.75rem;
+  border-radius: 5px;
+  color:white;
+  box-shadow: 1px 1px 5px #333;
+  min-width:5em;
+  text-align: center;
+  transition:0.25;
+  position:relative;
+}
+#mySubStatic a[rel='prev'] {
+  box-shadow: -1px 1px 5px #333;
+}
+#mySubStatic a:hover {
+  box-shadow: -1px -1px 5px #333;
+  inset : 1px
+}
+#mySubStatic a[rel='prev']:hover {
+  box-shadow: 1px 1px 5px #333;
+  inset : -1px
+}
+#mySubStatic a.active {
+  background: gray;
+  box-shadow: none;
+  pointer-events: none
+}
