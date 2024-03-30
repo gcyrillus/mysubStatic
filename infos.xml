@@ -2,8 +2,8 @@
 <document>
     <title>sub static</title>
     <author>G.Cyrille</author>
-    <version>3.0.4</version>
-	<date>27/03/2024</date>
+    <version>3.0.5</version>
+	<date>30/03/2024</date>
     <site>https://re7net.com</site>
     <description><![CDATA[Ajoute la possibilité de créer des sous-groupe aux groupes pages statiques. 
     Injecte une class "has-children" aux listes de groupes.
