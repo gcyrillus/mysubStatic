@@ -1,7 +1,7 @@
 <?php
 	/**
 		* Plugin 	mySubStatic
-		* @version 3.0.3
+		* @version 3.0.5
 		* @author	Cyrille G.  @ re7net.com
 		* pages statique à deux niveaux
 	**/
@@ -169,7 +169,7 @@
 					$breacrumbs.='					<li>'.$this->plxMotor->aStats[$this->plxMotor->cible]['group'].'</li>'.PHP_EOL;
 					}
 					$breacrumbs.='					<li><em class="active">'.$active.'</em></li>'.PHP_EOL;			
-				$breacrumbs.='				</ul>';
+					$breacrumbs.='				</ul>';
 			}		
 			if(<?= $navgroup ?> == 1 ) {				
 				#navigation niveau groupe
@@ -185,7 +185,7 @@
 							$nav .=  $adj;
 						}
 					$nav .=  '</nav>';
-			}
+				}
 			}
 			
 			# On va verifier que la page a inclure est lisible
@@ -208,7 +208,7 @@
 			# fin de traitement de la page statique
 			return true;
 			<?php
-            echo self::END_CODE;			
+            		echo self::END_CODE;			
 		}
 		
 		/* 	
@@ -240,20 +240,25 @@
 					$pregArrayjs = preg_replace(array_keys( $reformat ), array_values( $reformat ), $pregArray);
 					
 					echo self::BEGIN_CODE;
-				?>
-				$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>'.PHP_EOL, $output);
-			<?php
-				echo self::END_CODE;
-			}			  
-			# nettoyage final
-			echo self::BEGIN_CODE;
-			?>	
+					?>
+					$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>'.PHP_EOL, $output);
+					<?php
+					echo self::END_CODE;
+				}			  
+				# application des regex
+				echo self::BEGIN_CODE;
+				?>	
 				$replace= <?= 'array'.$pregArrayjs  ?>;
-				$output = preg_replace(array_keys( $replace ), array_values( $replace ), $output);
-				$output = str_replace('</body>', ob_get_clean().'<script src="'.PLX_ROOT.'plugins/<?= __CLASS__ ?>/js/<?= __CLASS__ ?>.js"></script>'.PHP_EOL.'</body>', $output);
-			<?php
-			echo self::END_CODE;
-		}
+				$output = preg_replace(array_keys( $replace ), array_values( $replace ), $output
+				<?php
+				echo self::END_CODE;
+			}
+		# injection du script d'ouverture
+		echo self::BEGIN_CODE;
+		?>
+			$output = str_replace('</body>', ob_get_clean().'<script src="'.PLX_ROOT.'plugins/<?= __CLASS__ ?>/js/<?= __CLASS__ ?>.js"></script>'.PHP_EOL.'</body>', $output);
+		<?php
+		echo self::END_CODE;
 	}
 
 	public function AdminStaticsPrepend() {		
