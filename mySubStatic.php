@@ -249,7 +249,7 @@
 				echo self::BEGIN_CODE;
 				?>	
 				$replace= <?= 'array'.$pregArrayjs  ?>;
-				$output = preg_replace(array_keys( $replace ), array_values( $replace ), $output
+				$output = preg_replace(array_keys( $replace ), array_values( $replace ), $output);
 				<?php
 				echo self::END_CODE;
 			}
