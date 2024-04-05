@@ -11,6 +11,6 @@ $LANG = array(
 'L_CONFIG_EXPERT'			=> 'Configuration avançée !',
 'L_NEXT'					=> 'Page suivante',
 'L_PREVIOUS'				=> 'Page précédente',
-'L_SISTERS'					=> 'Page(s) associée(s) ' ,
+'L_SISTERS'					=> 'Page(s) similaire(s)',
 );
-?> 
+?>

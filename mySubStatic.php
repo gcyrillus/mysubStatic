@@ -1,7 +1,7 @@
 <?php
 	/**
 		* Plugin 	mySubStatic
-		* @version 3.0.5
+		* @version 3.0.3
 		* @author	Cyrille G.  @ re7net.com
 		* pages statique à deux niveaux
 	**/
@@ -123,15 +123,20 @@
 		public function plxShowStaticContentBegin() {
 			$ariane 	= $this->getParam('breadcrumbs')=='' ? 0 : $this->getParam('breadcrumbs');
 			$navgroup 	= $this->getParam('interlink')	=='' ? 0 : $this->getParam('interlink');
+			$navSisters = $this->getParam('sisters')	=='' ? 0 : $this->getParam('sisters');
 			echo self::BEGIN_CODE;
 			?>	
 			$active =$this->plxMotor->aStats[$this->plxMotor->cible]['name'];
+			$sisters = trim(substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3));
 			$breacrumbs='';
 			$nav='';
+			$subnav='';
 			$rel='<?= L_PAGINATION_PREVIOUS_TITLE  ?>: ';
 			$group_active ='';
 			$cocoon=array();
+			$subcocoon=array();
 			foreach ($this->plxMotor->aStats as $k => $v) {
+				# navigation dans le groupe
 				if(
 				$v['group'] !=''  and $v['group'] !='home' 
 				and
@@ -152,8 +157,27 @@
 					$url = $this->plxMotor->urlRewrite('?static' . intval($k) . '/' . $v['url']);
 					
 					$cocoon[plxUtils::strCheck($v['name'])]= '<a href="'.$url.'" rel="'.$rel.'" title="'.$rel.' '.plxUtils::strCheck($v['name']).'">'.plxUtils::strCheck($v['name']).'</a>';
-				}		
+				}
+				#navigation dans le niveau
+				if(
+				$v['group'] !=''  and $v['group'] !='home' 
+				and
+				intval(trim(substr($v['group'],0,3))) == $this->plxMotor->cible
+				) {
+					#recup URL
+					if ($v['url'][0] == '?') # url interne commençant par ?
+					$url = $this->plxMotor->urlRewrite($v['url']);
+					elseif (plxUtils::checkSite($v['url'], false)) # url externe en http ou autre
+					$url = $v['url'];
+					else # url page statique
+					$url = $this->plxMotor->urlRewrite('?static' . intval($k) . '/' . $v['url']);
+					
+					$subcocoon[plxUtils::strCheck($v['name'])]= '<a href="'.$url.'"  title="'.$rel.' '.plxUtils::strCheck($v['name']).'">'.plxUtils::strCheck($v['name']).'</a>';
+								
+				}
 			}
+			
+			
 			
 			if(<?= $ariane ?> == 1  and $this->plxMotor->aStats[$this->plxMotor->cible]['group'] !='' ) {			
 				#fil d'ariane
@@ -169,7 +193,23 @@
 					$breacrumbs.='					<li>'.$this->plxMotor->aStats[$this->plxMotor->cible]['group'].'</li>'.PHP_EOL;
 					}
 					$breacrumbs.='					<li><em class="active">'.$active.'</em></li>'.PHP_EOL;			
-					$breacrumbs.='				</ul>';
+				$breacrumbs.='				</ul>';
+			}		
+			if(<?= $navSisters ?> == 1 ) {	
+				#navigation niveau 
+				if(count($subcocoon)>0) {
+					if(array_key_exists(trim(substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],0,3)),$this->plxMotor->aStats)) {
+						$groupName= substr($this->plxMotor->aStats[$this->plxMotor->cible]['group'],3);
+					}
+					else {
+						$groupName=$this->plxMotor->aStats[$this->plxMotor->cible]['group'];
+					}				
+					$subnav = '<nav id="sub<?= __CLASS__ ?>" class="prevNext"><?= $this->lang('L_SISTERS') ?>:';
+						foreach ($subcocoon as $adsister) {
+							$subnav .=  $adsister;
+						}
+					$subnav .=  '</nav>';
+			}
 			}		
 			if(<?= $navgroup ?> == 1 ) {				
 				#navigation niveau groupe
@@ -185,7 +225,7 @@
 							$nav .=  $adj;
 						}
 					$nav .=  '</nav>';
-				}
+			}
 			}
 			
 			# On va verifier que la page a inclure est lisible
@@ -199,16 +239,16 @@
 				$output = ob_get_clean();
 				eval($this->plxMotor->plxPlugins->callHook('plxShowStaticContent'));
 				
-				$output= $breacrumbs.PHP_EOL.$output.PHP_EOL.$nav;
+				$output= $breacrumbs.PHP_EOL.$output.PHP_EOL.$subnav.PHP_EOL.$nav;
 				echo $output;
 			} else {
-				echo $breacrumbs.'<p class="alert orange">' . L_STATICCONTENT_INPROCESS . '</p>'.$nav;
+				echo $breacrumbs.'<p class="alert orange">' . L_STATICCONTENT_INPROCESS . '</p>'.$subnav.PHP_EOL.$nav;
 			}			
 			
 			# fin de traitement de la page statique
 			return true;
 			<?php
-            		echo self::END_CODE;			
+            echo self::END_CODE;			
 		}
 		
 		/* 	
@@ -240,25 +280,20 @@
 					$pregArrayjs = preg_replace(array_keys( $reformat ), array_values( $reformat ), $pregArray);
 					
 					echo self::BEGIN_CODE;
-					?>
-					$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>'.PHP_EOL, $output);
-					<?php
-					echo self::END_CODE;
-				}			  
-				# application des regex
-				echo self::BEGIN_CODE;
-				?>	
+				?>
+				$output = str_replace('</li><!-- <?= $name ?> -->', ob_get_clean().PHP_EOL.'<?= $html ?>		</li>'.PHP_EOL, $output);
+			<?php
+				echo self::END_CODE;
+			}			  
+			# nettoyage final
+			echo self::BEGIN_CODE;
+			?>	
 				$replace= <?= 'array'.$pregArrayjs  ?>;
 				$output = preg_replace(array_keys( $replace ), array_values( $replace ), $output);
-				<?php
-				echo self::END_CODE;
-			}
-		# injection du script d'ouverture
-		echo self::BEGIN_CODE;
-		?>
-			$output = str_replace('</body>', ob_get_clean().'<script src="'.PLX_ROOT.'plugins/<?= __CLASS__ ?>/js/<?= __CLASS__ ?>.js"></script>'.PHP_EOL.'</body>', $output);
-		<?php
-		echo self::END_CODE;
+				$output = str_replace('</body>', ob_get_clean().'<script src="'.PLX_ROOT.'plugins/<?= __CLASS__ ?>/js/<?= __CLASS__ ?>.js"></script>'.PHP_EOL.'</body>', $output);
+			<?php
+			echo self::END_CODE;
+		}
 	}
 
 	public function AdminStaticsPrepend() {		

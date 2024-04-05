@@ -10,6 +10,7 @@
   border-bottom: solid crimson;
   justify-content:center;
 }
+
 #form_mySubStatic fieldset,
 #form_mySubStaticlegend {
   padding:revert;
@@ -67,13 +68,13 @@
 .subgroup select {
   width: 6em;
 }
-tbody input[id$=_group_cleaned]:not([class^="level"]) {
+tbody input[id$=_group_cleaned]:not([class]) {
   background: azure;
   text-align: end;
   font-style: italic;
 }
 tbody input[id$="_group"][value],
-tbody input[value][class^="level"] {
+tbody input[value][class]{
   background: cornsilk;
   font-weight: bolder;
   color: darkblue;

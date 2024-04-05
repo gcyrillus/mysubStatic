@@ -13,6 +13,7 @@
 		$plxPlugin->setParam('format_group', $_POST['format_group'], 'cdata');
 		$plxPlugin->setParam('breadcrumbs', $_POST['breadcrumbs'], 'numeric');
 		$plxPlugin->setParam('interlink', $_POST['interlink'], 'numeric');
+		$plxPlugin->setParam('sisters', $_POST['sisters'], 'numeric');
 		$expert_array=array();
 		foreach($_POST['expertNum'] as $expert_num) {
 			$key_name= 'pregkey-'.$expert_num;
@@ -38,6 +39,7 @@
 	$var['breadcrumbs'] = $plxPlugin->getParam('breadcrumbs')=='' ? 0 : $plxPlugin->getParam('breadcrumbs');
 	$var['interlink'] = $plxPlugin->getParam('interlink')=='' ? 0 : $plxPlugin->getParam('interlink');
 	$var['expert'] = $plxPlugin->getParam('expert')==$plxPlugin->defaultExpert ? '' : $plxPlugin->getParam('expert');
+	$var['sisters'] = $plxPlugin->getParam('sisters')=='' ? 0 :  $plxPlugin->getParam('sisters');
 	
 	# fermeture du wizard
 	if (isset($_SESSION['justactivated'.basename(__DIR__)])) {unset($_SESSION['justactivated'.basename(__DIR__)]);}
@@ -70,6 +72,10 @@
 		<p>
 			<label for="interlink" ><?php $plxPlugin->lang('L_SHOW_INTERLINK') ?>&nbsp;:</label>
 			<?php plxUtils::printSelect('interlink',array('1'=>L_YES,'0'=>L_NO),$var['interlink']); ?>
+		</p>
+		<p>
+			<label for="sisters" ><?php $plxPlugin->lang('L_SHOW_LEVEL') ?>&nbsp;:</label>
+			<?php plxUtils::printSelect('sisters',array('1'=>L_YES,'0'=>L_NO),$var['sisters']); ?>
 		</p>
 		
 	</fieldset>

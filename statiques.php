@@ -75,7 +75,7 @@ function checkBox(cb) {
 			$ordre = 1;
 			# Si on a des pages statiques
 			$parentGroup = array();
-			$option = "<option value='' selected>".L_NONE1."</option>";
+			$option = "<option value='---' selected>".L_NONE1."</option>";
 			if($plxAdmin->aStats) {
 				foreach($plxAdmin->aStats as $k=>$v) { # Pour chaque page statique
 					echo '<tr>'.PHP_EOL;
